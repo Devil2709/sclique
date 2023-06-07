@@ -1,14 +1,10 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
-import Hello from './HelloWorld';
-import LongCard from './LongCard'
+import "./App.css";
+import Challenges from "./Pages/Challenges";
 
 function App() {
   return (
-    <div className="App">
-        <h1>Custom</h1>
-        <LongCard title="Coding Challenge" icon={logo} description="Blah Blah"/>
+    <div className="App" width="100%">
+      <Challenges />
     </div>
   );
 }
