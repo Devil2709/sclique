@@ -12,6 +12,7 @@ const BannerCard = (props) => {
   return (
     <Card
       orientation="horizontal"
+      variant="outline"
       sx={{
         width: "100",
         margin: 1,
@@ -20,7 +21,7 @@ const BannerCard = (props) => {
         "--Card-padding": "20px",
         boxShadow: "md",
         transition: "0.2s ease",
-        background: "#b39ddb",
+        background: "#white",
         overflow: "auto",
         "&:hover": {
           boxShadow: "lg",

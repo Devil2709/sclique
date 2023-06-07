@@ -1,9 +1,11 @@
 import React from "react";
 import { Card, CardContent, CardCover, Link, Typography } from "@mui/joy";
+import EventIcon from "@mui/icons-material/Event";
 
-const LongCard = (props) => {
+const ChallengeCards = (props) => {
   return (
     <Card
+      variant="outlined"
       sx={{
         width: "330px",
         margin: 1,
@@ -29,7 +31,7 @@ const LongCard = (props) => {
             "linear-gradient(to top, rgba(0,0,0,0.4), rgba(0,0,0,0) 200px), linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0) 300px)",
         }}
       />
-      <CardContent sx={{ justifyContent: "flex-end" }}>
+      <CardContent sx={{ justifyContent: "flex-end", padding: 1 }}>
         <Typography align="left" gutterBottom color="white" level="h4">
           <Link
             overlay
@@ -40,7 +42,12 @@ const LongCard = (props) => {
             {props.title}
           </Link>
         </Typography>
-        <Typography align="left" level="body1" textColor="white">
+        <Typography
+          align="left"
+          level="body1"
+          textColor="#e0e0e0"
+          startDecorator={<EventIcon />}
+        >
           {props.description}
         </Typography>
       </CardContent>
@@ -48,4 +55,4 @@ const LongCard = (props) => {
   );
 };
 
-export default LongCard;
+export default ChallengeCards;

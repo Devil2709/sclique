@@ -1,22 +1,27 @@
 import React from "react";
 import "../Styles/Challenges.css";
-import LongCard from "../Components/LongCard";
 import BannerCard from "../Components/BannerCards";
-import CodingImg from "../Images/CodingImg.png";
+import CodingImg from "../Images/CodingImg.jpeg";
 import LogicalImg from "../Images/LogicalImg.jpeg";
+import CSFundamentalImg from "../Images/CSFundamentalImg.jpeg";
 import { List } from "@mui/joy";
+import ChallengeCards from "../Components/ChallengeCard";
 
 var ObjAr = [
   {
     title: "Coding Challenge",
     image: CodingImg,
-    description:
-      "Write a program to solve the given problem and earn loads of credit.",
+    description: "08 June 2023",
   },
   {
     title: "Logical Reasoning Challenge",
     image: LogicalImg,
-    description: "Solve interesting logical problems as fast as you can.",
+    description: "09 June 2023",
+  },
+  {
+    title: "CS Fundamentals Challenge",
+    image: CSFundamentalImg,
+    description: "09 June 2023",
   },
 ];
 
@@ -37,9 +42,9 @@ const Challenges = () => {
         style={{ overflow: "auto" }}
       >
         {(function (list, k) {
-          for (let i = 0; i < 2; i++) {
+          for (let i = 0; i < k; i++) {
             list.push(
-              <LongCard
+              <ChallengeCards
                 title={ObjAr[i].title}
                 image={ObjAr[i].image}
                 description={ObjAr[i].description}
@@ -47,7 +52,7 @@ const Challenges = () => {
             );
           }
           return list;
-        })([], 2)}
+        })([], ObjAr.length)}
       </List>
     </div>
   );
