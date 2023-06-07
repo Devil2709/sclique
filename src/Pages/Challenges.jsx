@@ -1,6 +1,6 @@
 import React from "react";
 import "../Styles/Challenges.css";
-import BannerCard from "../Components/BannerCards";
+import BannerCard from "../Components/BannerCard";
 import CodingImg from "../Images/CodingImg.jpeg";
 import LogicalImg from "../Images/LogicalImg.jpeg";
 import CSFundamentalImg from "../Images/CSFundamentalImg.jpeg";
@@ -12,16 +12,19 @@ var ObjAr = [
     title: "Coding Challenge",
     image: CodingImg,
     description: "08 June 2023",
+    credit: 200,
   },
   {
     title: "Logical Reasoning Challenge",
     image: LogicalImg,
     description: "09 June 2023",
+    credit: 100,
   },
   {
     title: "CS Fundamentals Challenge",
     image: CSFundamentalImg,
-    description: "09 June 2023",
+    description: "10 June 2023",
+    credit: 80,
   },
 ];
 
@@ -48,6 +51,7 @@ const Challenges = () => {
                 title={ObjAr[i].title}
                 image={ObjAr[i].image}
                 description={ObjAr[i].description}
+                credit={ObjAr[i].credit}
               />
             );
           }

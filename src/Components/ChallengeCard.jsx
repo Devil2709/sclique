@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, CardContent, CardCover, Link, Typography } from "@mui/joy";
+import { Card, CardContent, CardCover, Link, Typography, Chip } from "@mui/joy";
 import EventIcon from "@mui/icons-material/Event";
 
 const ChallengeCards = (props) => {
@@ -31,6 +31,34 @@ const ChallengeCards = (props) => {
             "linear-gradient(to top, rgba(0,0,0,0.4), rgba(0,0,0,0) 200px), linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0) 300px)",
         }}
       />
+      <CardContent
+        sx={{
+          justifyContent: "flex-top-right",
+          padding: 1,
+          paddingTop: 0,
+          paddingRight: 0,
+          flexDirection: "row-reverse",
+        }}
+      >
+        <Chip
+          variant="soft"
+          color="info"
+          sx={{
+            maxHeight: "30px",
+            "--Chip-paddingInline": "10px",
+            "--Chip-decoratorChildHeight": "18px",
+          }}
+          startDecorator={
+            <img
+              src="https://cdn-icons-png.flaticon.com/128/2933/2933116.png"
+              height="24px"
+              alt="coins"
+            />
+          }
+        >
+          {props.credit}
+        </Chip>
+      </CardContent>
       <CardContent sx={{ justifyContent: "flex-end", padding: 1 }}>
         <Typography align="left" gutterBottom color="white" level="h4">
           <Link
