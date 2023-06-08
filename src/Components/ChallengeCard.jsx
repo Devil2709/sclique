@@ -6,6 +6,7 @@ const ChallengeCard = (props) => {
   return (
     <Card
       variant="outlined"
+      key={props.key}
       sx={{
         minWidth: "330px",
         margin: 1,

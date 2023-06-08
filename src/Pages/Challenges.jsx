@@ -69,8 +69,11 @@ const Challenges = () => {
       </h1>
       <List
         orientation="horizontal"
-        justifyContent="left"
-        style={{ overflow: "auto", paddingBottom: "20px" }}
+        style={{
+          overflow: "auto",
+          paddingBottom: "20px",
+          justifyContent: "left",
+        }}
       >
         {(function (list, k) {
           for (let i = 0; i < k; i++) {
@@ -80,19 +83,23 @@ const Challenges = () => {
                 image={ChallengesAr[i].image}
                 date={ChallengesAr[i].date}
                 credit={ChallengesAr[i].credit}
+                key={i}
               />
             );
           }
           return list;
         })([], ChallengesAr.length)}
       </List>
-      <h1 className="Contest-header" align="left" maginTop="40px">
+      <h1 className="Contest-header" align="left">
         Upcoming Contests
       </h1>
       <List
         orientation="horizontal"
-        justifyContent="left"
-        style={{ overflow: "auto", paddingBottom: "20px" }}
+        style={{
+          overflow: "auto",
+          paddingBottom: "20px",
+          justifyContent: "left",
+        }}
       >
         {(function (list, k) {
           for (let i = 0; i < k; i++) {
@@ -102,6 +109,7 @@ const Challenges = () => {
                 image={ContestAr[i].image}
                 date={ContestAr[i].date}
                 credit={ContestAr[i].credit}
+                key={i}
               />
             );
           }

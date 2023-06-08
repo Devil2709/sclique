@@ -5,26 +5,43 @@ import Tab from "@mui/material/Tab";
 import Paper from "@mui/material/Paper";
 import { Avatar } from "@mui/material";
 import Logo from "../Images/ScliqueLogo.png";
+import { Link, useLocation, matchPath } from "react-router-dom";
 
 function LinkTab(props) {
   return (
-    <Tab
-      component="a"
-      sx={{ width: "180px", height: "80px" }}
-      onClick={(event) => {
-        event.preventDefault();
-      }}
-      {...props}
-    />
+    <Tab component={Link} sx={{ width: "180px", height: "80px" }} {...props} />
   );
 }
 
-export default function NavBar() {
-  const [value, setValue] = React.useState(0);
+function useRouteMatch(patterns) {
+  const { pathname } = useLocation();
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
+  for (let i = 0; i < patterns.length; i += 1) {
+    const pattern = patterns[i];
+    const possibleMatch = matchPath(pattern, pathname);
+    console.log(possibleMatch);
+    if (possibleMatch !== null) {
+      return possibleMatch;
+    }
+  }
+}
+
+export default function NavBar() {
+  // const [value, setValue] = React.useState("/home");
+
+  console.log(useLocation().pathname);
+  // const handleChange = (event, newValue) => {
+  //   setValue(newValue);
+  // };
+
+  const routeMatch = useRouteMatch([
+    "/home",
+    "/learn",
+    "/challenges",
+    "/store",
+  ]);
+  const currentTab = routeMatch?.pattern?.path;
+  console.log(currentTab);
 
   return (
     <Paper
@@ -44,15 +61,11 @@ export default function NavBar() {
           marginLeft: "auto",
         }}
       >
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          aria-label="nav tabs example"
-        >
-          <LinkTab label="Home" href="/drafts" />
-          <LinkTab label="Learn" href="/trash" />
-          <LinkTab label="Challenges" href="/spam" />
-          <LinkTab label="Store" href="/spam" />
+        <Tabs value={currentTab} aria-label="nav tab">
+          <LinkTab label="Home" to="/home" value="/home" />
+          <LinkTab label="Learn" to="/learn" value="/learn" />
+          <LinkTab label="Challenges" to="/challenges" value="/challenges" />
+          <LinkTab label="Store" to="/store" value="/store" />
         </Tabs>
         <Avatar sx={{ alignSelf: "center", mx: 5 }} />
       </Box>

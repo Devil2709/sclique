@@ -25,8 +25,10 @@ const ContestCard = (props) => {
         <img
           src={props.image}
           alt="Coding Contest"
-          maxWidth="10px"
-          maxHeight="2px"
+          sx={{
+            maxWidth: "10px",
+            maxHeight: "2px",
+          }}
         />
       </CardCover>
       <CardCover
