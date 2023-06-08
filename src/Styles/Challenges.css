@@ -1,9 +1,6 @@
 .Back {
+  background: transparent;
   padding: 40px;
-  object-fit: cover;
-  background-color: #e3f2fd;
-  background-position: center;
-  background-size: cover;
 }
 
 .Challenges-header {
