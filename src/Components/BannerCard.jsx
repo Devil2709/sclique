@@ -21,7 +21,7 @@ const BannerCard = (props) => {
         "--Card-padding": "20px",
         boxShadow: "md",
         transition: "0.2s ease",
-        background: "#white",
+        background: "white",
         overflow: "auto",
         "&:hover": {
           boxShadow: "lg",

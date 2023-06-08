@@ -32,7 +32,7 @@ const ContestCard = (props) => {
       <CardCover
         sx={{
           background:
-            "linear-gradient(to top, rgba(0,0,0,0.4), rgba(0,0,0,0) 200px), linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0) 300px)",
+            "linear-gradient(to top, rgba(0,0,0,0.4), rgba(0,0,0,0) 200px), linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0) 200px)",
         }}
       />
       <CardContent sx={{ justifyContent: "flex-end", padding: 1 }}>
