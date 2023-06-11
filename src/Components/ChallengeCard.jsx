@@ -1,86 +1,110 @@
 import React from "react";
-import { Card, CardContent, CardCover, Link, Typography, Chip } from "@mui/joy";
+import "@fontsource/roboto/400.css";
+import {
+  Card,
+  CardContent,
+  Link,
+  CardMedia,
+  CardActionArea,
+  ThemeProvider,
+  createTheme,
+  Typography,
+  Stack,
+  Chip,
+  Avatar,
+} from "@mui/material";
 import EventIcon from "@mui/icons-material/Event";
+import CssBaseline from "@mui/material/CssBaseline";
+
+const darkTheme = createTheme({
+  palette: {
+    mode: "dark",
+    primary: {
+      main: "#000000",
+    },
+    secondary: {
+      main: "#0277bd",
+    },
+  },
+});
 
 const ChallengeCard = (props) => {
   return (
-    <Card
-      variant="outlined"
-      key={props.key}
-      sx={{
-        minWidth: "330px",
-        margin: 1,
-        minHeight: "240px",
-        "--Card-radius": "20px",
-        "--Card-padding": "20px",
-        boxShadow: "md",
-        transition: "0.2s ease",
-        overflow: "auto",
-        "&:hover": {
-          boxShadow: "lg",
-          transform: "scale3d(1.05, 1.05, 1)",
-          borderColor: "neutral.outlinedHoverBorder",
-        },
-      }}
-    >
-      <CardCover>
-        <img src={props.image} alt="Coding Contest" />
-      </CardCover>
-      <CardCover
+    <ThemeProvider theme={darkTheme}>
+      <CssBaseline />
+      <Card
+        variant="outlined"
+        key={props.key}
         sx={{
-          background:
-            "linear-gradient(to top, rgba(0,0,0,0.4), rgba(0,0,0,0) 200px), linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0) 300px)",
-        }}
-      />
-      <CardContent
-        sx={{
-          justifyContent: "flex-top-right",
-          padding: 1,
-          paddingTop: 0,
-          paddingRight: 0,
-          flexDirection: "row-reverse",
+          minWidth: "330px",
+          maxWidth: "330px",
+          borderWidth: 2,
+          margin: 1,
+          borderRadius: "10px",
+          minHeight: "240px",
+          boxShadow: "md",
+          transition: "0.2s ease",
+          "&:hover": {
+            boxShadow: "lg",
+            transform: "scale3d(1.05, 1.05, 1)",
+            borderColor: "neutral.outlinedHoverBorder",
+          },
         }}
       >
-        <Chip
-          variant="soft"
-          color="info"
-          sx={{
-            maxHeight: "30px",
-            "--Chip-paddingInline": "10px",
-            "--Chip-decoratorChildHeight": "18px",
-          }}
-          startDecorator={
-            <img
-              src="https://cdn-icons-png.flaticon.com/128/2933/2933116.png"
-              height="24px"
-              alt="coins"
+        <CardActionArea>
+          <CardMedia
+            component="img"
+            height="180"
+            image={props.image}
+            alt="Coding Contest"
+          />
+          <CardContent sx={{ justifyContent: "flex-end" }}>
+            <Chip
+              style={{
+                position: "absolute",
+                right: 0,
+                top: 0,
+                margin: 10,
+              }}
+              color="primary"
+              avatar={
+                <Avatar
+                  src="https://cdn-icons-png.flaticon.com/128/2933/2933116.png"
+                  alt="icon"
+                />
+              }
+              label={props.credit}
             />
-          }
-        >
-          {props.credit}
-        </Chip>
-      </CardContent>
-      <CardContent sx={{ justifyContent: "flex-end", padding: 1 }}>
-        <Typography align="left" gutterBottom color="white" level="h4">
-          <Link
-            overlay
-            underline="none"
-            href={props.link}
-            sx={{ color: "#FFFFFF" }}
-          >
-            {props.title}
-          </Link>
-        </Typography>
-        <Typography
-          align="left"
-          level="body1"
-          textColor="#e0e0e0"
-          startDecorator={<EventIcon />}
-        >
-          {props.date}
-        </Typography>
-      </CardContent>
-    </Card>
+            <Typography
+              align="left"
+              gutterBottom
+              color="white"
+              variant="h6"
+              sx={{ my: 1, fontWeight: "bold" }}
+            >
+              <Link
+                overlay
+                underline="none"
+                href={props.link}
+                sx={{ color: "#e0e0e0" }}
+              >
+                {props.title}
+              </Link>
+            </Typography>
+            <Stack direction="row" alignItems="center" gap={1}>
+              <EventIcon color="disabled" />
+              <Typography
+                align="left"
+                variant="body1"
+                sx={{ color: "#7B7B7B", fontWeight: "bold" }}
+              >
+                {props.date}
+              </Typography>
+            </Stack>
+          </CardContent>
+        </CardActionArea>
+      </Card>
+    </ThemeProvider>
   );
 };
 

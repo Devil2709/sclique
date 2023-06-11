@@ -11,6 +11,9 @@ import CodechefLogo from "../Images/CodechefLogo.jpeg";
 import LeetCodeLogo from "../Images/LeetCodeLogo.jpeg";
 import AtCoderLogo from "../Images/AtCoderLogo.png";
 import ContestCard from "../Components/ContestCard";
+import { Box, Divider, useTheme, useThemeProps } from "@mui/material";
+import SwipeableViews from "react-swipeable-views";
+import AutoSwipeView from "../Components/AutoSwipeView";
 
 var ChallengesAr = [
   {
@@ -58,65 +61,87 @@ var ContestAr = [
 
 const Challenges = () => {
   return (
-    <div className="Back">
-      <BannerCard
-        title={"Coding Challenge"}
-        image={CodingImg}
-        description="Write a program to solve the given problem and earn loads of credit."
-      />
-      <h1 className="Challenges-header" align="left">
-        Challenges
-      </h1>
-      <List
-        orientation="horizontal"
-        style={{
-          overflow: "auto",
-          paddingBottom: "20px",
-          justifyContent: "left",
-        }}
-      >
-        {(function (list, k) {
-          for (let i = 0; i < k; i++) {
-            list.push(
-              <ChallengeCard
-                title={ChallengesAr[i].title}
-                image={ChallengesAr[i].image}
-                date={ChallengesAr[i].date}
-                credit={ChallengesAr[i].credit}
-                key={i}
-              />
-            );
-          }
-          return list;
-        })([], ChallengesAr.length)}
-      </List>
-      <h1 className="Contest-header" align="left">
-        Upcoming Contests
-      </h1>
-      <List
-        orientation="horizontal"
-        style={{
-          overflow: "auto",
-          paddingBottom: "20px",
-          justifyContent: "left",
-        }}
-      >
-        {(function (list, k) {
-          for (let i = 0; i < k; i++) {
-            list.push(
-              <ContestCard
-                title={ContestAr[i].title}
-                image={ContestAr[i].image}
-                date={ContestAr[i].date}
-                credit={ContestAr[i].credit}
-                key={i}
-              />
-            );
-          }
-          return list;
-        })([], ContestAr.length)}
-      </List>
-    </div>
+    <Box className="Back">
+      <Box className="banner_back" flexGrow={1}>
+        <AutoSwipeView arr={ChallengesAr} />
+      </Box>
+      <Box style={{ padding: "40px" }}>
+        <h1 className="Challenges-header" align="left">
+          Challenges
+        </h1>
+        <Divider
+          role="presentation"
+          variant="middle"
+          sx={{
+            my: 3,
+            marginTop: 2,
+            bgcolor: "#0277bd",
+            width: "200px",
+            height: "2px",
+          }}
+        />
+        <List
+          orientation="horizontal"
+          style={{
+            overflow: "auto",
+            paddingBottom: "20px",
+            justifyContent: "left",
+          }}
+        >
+          {(function (list, k) {
+            for (let i = 0; i < k; i++) {
+              list.push(
+                <ChallengeCard
+                  title={ChallengesAr[i].title}
+                  image={ChallengesAr[i].image}
+                  date={ChallengesAr[i].date}
+                  credit={ChallengesAr[i].credit}
+                  key={i}
+                />
+              );
+            }
+            return list;
+          })([], ChallengesAr.length)}
+        </List>
+        <h1 className="Contest-header" align="left">
+          Upcoming Contests
+        </h1>
+        <Divider
+          role="presentation"
+          variant="middle"
+          sx={{
+            my: 3,
+            marginTop: 2,
+            bgcolor: "#",
+            width: "350px",
+            height: "2px",
+          }}
+        />
+        <List
+          orientation="horizontal"
+          style={{
+            overflow: "auto",
+            paddingBottom: "20px",
+            justifyContent: "left",
+          }}
+        >
+          {(function (list, k) {
+            for (let i = 0; i < k; i++) {
+              list.push(
+                <ContestCard
+                  title={ContestAr[i].title}
+                  image={ContestAr[i].image}
+                  date={ContestAr[i].date}
+                  credit={ContestAr[i].credit}
+                  key={i}
+                />
+              );
+            }
+            return list;
+          })([], ContestAr.length)}
+        </List>
+      </Box>
+    </Box>
   );
 };
 

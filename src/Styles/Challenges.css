@@ -1,18 +1,23 @@
 .Back {
   background: transparent;
+}
+
+.banner_back {
+  width: 100%;
+  background: url("../Images/backgrnd.png");
   padding: 40px;
 }
 
 .Challenges-header {
-  margin-left: 10px;
-  margin-top: 60px;
-  margin-bottom: 20px;
+  margin: 0px;
+  margin-left: 14px;
+  margin-top: 40px;
   text-align: "left";
 }
 
 .Contest-header {
-  margin-left: 10px;
-  margin-top: 40px;
+  margin-left: 14px;
+  margin-top: 20px;
   margin-bottom: 20px;
 }
 

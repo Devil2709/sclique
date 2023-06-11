@@ -4,57 +4,50 @@ import {
   CardContent,
   Link,
   Typography,
-  CardOverflow,
-  AspectRatio,
-} from "@mui/joy";
+  CardActionArea,
+} from "@mui/material";
+import { CardMedia } from "@mui/material";
 
 const BannerCard = (props) => {
   return (
     <Card
-      orientation="horizontal"
       variant="outline"
       sx={{
-        width: "100",
-        margin: 1,
-        minHeight: "70%",
-        "--Card-radius": "20px",
-        "--Card-padding": "20px",
-        boxShadow: "md",
         transition: "0.2s ease",
-        background: "white",
+        background: "#262626",
         overflow: "auto",
-        "&:hover": {
-          boxShadow: "lg",
-          transform: "scale3d(1.02, 1.02, 1)",
-          borderColor: "neutral.outlinedHoverBorder",
-        },
+        display: "flex",
       }}
     >
-      <CardOverflow>
-        <AspectRatio sx={{ width: 500, overflow: "auto" }}>
-          <img src={props.image} alt="Coding" />
-        </AspectRatio>
-      </CardOverflow>
-      <CardContent sx={{ justifyContent: "center" }}>
-        <Typography textAlign="left" level="h2" marginLeft={2}>
-          <Link
-            overlay
-            underline="none"
-            href={props.link}
-            sx={{ color: "black" }}
+      <CardMedia
+        component="img"
+        sx={{ width: 400, height: 400 }}
+        image={props.image}
+        alt="Coding Contest"
+      ></CardMedia>
+      <CardActionArea>
+        <CardContent sx={{ alignItems: "center" }}>
+          <Typography textAlign="left" variant="h3" marginLeft={2}>
+            <Link
+              overlay
+              underline="none"
+              href={props.link}
+              sx={{ color: "#e0e0e0" }}
+            >
+              {props.title}
+            </Link>
+          </Typography>
+          <Typography
+            variant="h6"
+            color="#e0e0e0"
+            textAlign={"left"}
+            my={1}
+            marginLeft={2}
           >
-            {props.title}
-          </Link>
-        </Typography>
-        <Typography
-          level="body1"
-          textColor="black"
-          textAlign={"left"}
-          marginLeft={2}
-        >
-          {props.description}
-        </Typography>
-      </CardContent>
+            {props.description}
+          </Typography>
+        </CardContent>
+      </CardActionArea>
     </Card>
   );
 };

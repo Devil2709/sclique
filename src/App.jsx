@@ -6,18 +6,49 @@ import { Routes, Route, BrowserRouter } from "react-router-dom";
 
 function App() {
   return (
-    <section className="App">
+    <div className="App">
       <BrowserRouter>
-        <NavBar />
         <Routes>
-          <Route path="/" element={<Challenges />} />
+          <Route
+            path="/"
+            element={
+              <div>
+                <NavBar />
+                <Challenges />
+              </div>
+            }
+          />
           <Route path="home" element={<Home />} />
-          <Route path="learn" element={<Challenges />} />
-          <Route path="challenges" element={<Challenges />} />
-          <Route path="store" element={<Challenges />} />
+          <Route
+            path="learn"
+            element={
+              <div>
+                <NavBar />
+                <Challenges />
+              </div>
+            }
+          />
+          <Route
+            path="challenges"
+            element={
+              <div>
+                <NavBar />
+                <Challenges />
+              </div>
+            }
+          />
+          <Route
+            path="store"
+            element={
+              <div>
+                <NavBar />
+                <Challenges />
+              </div>
+            }
+          />
         </Routes>
       </BrowserRouter>
-    </section>
+    </div>
   );
 }
 

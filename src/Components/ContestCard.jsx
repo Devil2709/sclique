@@ -1,64 +1,86 @@
 import React from "react";
-import { Card, CardContent, CardCover, Link, Typography } from "@mui/joy";
+import "@fontsource/roboto/400.css";
+import {
+  Card,
+  CardContent,
+  Link,
+  CardMedia,
+  CardActionArea,
+  ThemeProvider,
+  createTheme,
+  Typography,
+  Stack,
+} from "@mui/material";
 import EventIcon from "@mui/icons-material/Event";
+import CssBaseline from "@mui/material/CssBaseline";
+
+const darkTheme = createTheme({
+  palette: {
+    mode: "dark",
+  },
+});
 
 const ContestCard = (props) => {
   return (
-    <Card
-      variant="outlined"
-      key={props.key}
-      sx={{
-        minWidth: "330px",
-        margin: 1,
-        minHeight: "240px",
-        "--Card-radius": "20px",
-        "--Card-padding": "20px",
-        boxShadow: "md",
-        transition: "0.2s ease",
-        "&:hover": {
-          boxShadow: "lg",
-          transform: "scale3d(1.05, 1.05, 1)",
-          borderColor: "neutral.outlinedHoverBorder",
-        },
-      }}
-    >
-      <CardCover sx={{ overflow: "auto", objectFit: "fill" }}>
-        <img
-          src={props.image}
-          alt="Coding Contest"
-          sx={{
-            maxWidth: "10px",
-            maxHeight: "2px",
-          }}
-        />
-      </CardCover>
-      <CardCover
+    <ThemeProvider theme={darkTheme}>
+      <CssBaseline />
+      <Card
+        variant="outlined"
+        key={props.key}
         sx={{
-          background:
-            "linear-gradient(to top, rgba(0,0,0,0.4), rgba(0,0,0,0) 200px), linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0) 200px)",
+          minWidth: "330px",
+          borderWidth: 2,
+          margin: 1,
+          borderRadius: "10px",
+          minHeight: "240px",
+          boxShadow: "md",
+          transition: "0.2s ease",
+          overflow: "auto",
+          "&:hover": {
+            boxShadow: "lg",
+            transform: "scale3d(1.05, 1.05, 1)",
+            borderColor: "neutral.outlinedHoverBorder",
+          },
         }}
-      />
-      <CardContent sx={{ justifyContent: "flex-end", padding: 1 }}>
-        <Typography align="left" gutterBottom color="white" level="h4">
-          <Link
-            overlay
-            underline="none"
-            href={props.link}
-            sx={{ color: "#FFFFFF" }}
-          >
-            {props.title}
-          </Link>
-        </Typography>
-        <Typography
-          align="left"
-          level="body1"
-          textColor="#e0e0e0"
-          startDecorator={<EventIcon />}
-        >
-          {props.date}
-        </Typography>
-      </CardContent>
-    </Card>
+      >
+        <CardActionArea>
+          <CardMedia
+            component="img"
+            height="180"
+            image={props.image}
+            alt="Coding Contest"
+          />
+          <CardContent sx={{ justifyContent: "flex-end" }}>
+            <Typography
+              align="left"
+              gutterBottom
+              color="white"
+              variant="h6"
+              sx={{ my: 1, fontWeight: "bold" }}
+            >
+              <Link
+                overlay
+                underline="none"
+                href={props.link}
+                sx={{ color: "#e0e0e0" }}
+              >
+                {props.title}
+              </Link>
+            </Typography>
+            <Stack direction="row" alignItems="center" gap={1}>
+              <EventIcon color="disabled" />
+              <Typography
+                align="left"
+                variant="body1"
+                sx={{ color: "#7B7B7B", fontWeight: "bold" }}
+              >
+                {props.date}
+              </Typography>
+            </Stack>
+          </CardContent>
+        </CardActionArea>
+      </Card>
+    </ThemeProvider>
   );
 };
 
