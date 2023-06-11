@@ -1,6 +1,5 @@
 import React from "react";
 import "../Styles/Challenges.css";
-import BannerCard from "../Components/BannerCard";
 import CodingImg from "../Images/CodingImg.jpeg";
 import LogicalImg from "../Images/LogicalImg.jpeg";
 import CSFundamentalImg from "../Images/CSFundamentalImg.jpeg";
@@ -11,8 +10,7 @@ import CodechefLogo from "../Images/CodechefLogo.jpeg";
 import LeetCodeLogo from "../Images/LeetCodeLogo.jpeg";
 import AtCoderLogo from "../Images/AtCoderLogo.png";
 import ContestCard from "../Components/ContestCard";
-import { Box, Divider, useTheme, useThemeProps } from "@mui/material";
-import SwipeableViews from "react-swipeable-views";
+import { Box, Divider } from "@mui/material";
 import AutoSwipeView from "../Components/AutoSwipeView";
 
 var ChallengesAr = [
