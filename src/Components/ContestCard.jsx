@@ -3,7 +3,6 @@ import "@fontsource/roboto/400.css";
 import {
   Card,
   CardContent,
-  Link,
   CardMedia,
   CardActionArea,
   ThemeProvider,
@@ -43,7 +42,7 @@ const ContestCard = (props) => {
           },
         }}
       >
-        <CardActionArea>
+        <CardActionArea href={props.link} target="_blank">
           <CardMedia
             component="img"
             height="180"
@@ -56,16 +55,9 @@ const ContestCard = (props) => {
               gutterBottom
               color="white"
               variant="h6"
-              sx={{ my: 1, fontWeight: "bold" }}
+              sx={{ my: 1, fontWeight: "bold", color: "#e0e0e0" }}
             >
-              <Link
-                overlay
-                underline="none"
-                href={props.link}
-                sx={{ color: "#e0e0e0" }}
-              >
-                {props.title}
-              </Link>
+              {props.title}
             </Typography>
             <Stack direction="row" alignItems="center" gap={1}>
               <EventIcon color="disabled" />

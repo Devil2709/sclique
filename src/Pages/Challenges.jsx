@@ -39,21 +39,25 @@ var ContestAr = [
     title: "Codeforces Round #874",
     image: CodeforcesLogo,
     date: "10 June 2023",
+    link: "https://codeforces.com/",
   },
   {
     title: "Codechef Starters #80",
     image: CodechefLogo,
     date: "09 June 2023",
+    link: "https://codechef.com/",
   },
   {
     title: "LeetCode Biweekly",
     image: LeetCodeLogo,
     date: "10 June 2023",
+    link: "https://leetcode.com/",
   },
   {
     title: "Atcoder Beginner #875",
     image: AtCoderLogo,
     date: "11 June 2023",
+    link: "https://atcoder.jp/",
   },
 ];
 
@@ -110,7 +114,7 @@ const Challenges = () => {
           sx={{
             my: 3,
             marginTop: 2,
-            bgcolor: "#",
+            bgcolor: "#0277bd",
             width: "350px",
             height: "2px",
           }}
@@ -131,6 +135,7 @@ const Challenges = () => {
                   image={ContestAr[i].image}
                   date={ContestAr[i].date}
                   credit={ContestAr[i].credit}
+                  link={ContestAr[i].link}
                   key={i}
                 />
               );

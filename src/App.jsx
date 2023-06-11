@@ -3,6 +3,7 @@ import NavBar from "./Components/NavBar";
 import Challenges from "./Pages/Challenges";
 import Home from "./Pages/Home";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
+import Learn from "./Pages/Learn";
 
 function App() {
   return (
@@ -24,7 +25,7 @@ function App() {
             element={
               <div>
                 <NavBar />
-                <Challenges />
+                <Learn />
               </div>
             }
           />
