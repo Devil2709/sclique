@@ -1,7 +1,6 @@
 import {
   Box,
   CssBaseline,
-  Divider,
   Drawer,
   ThemeProvider,
   Toolbar,
@@ -10,23 +9,33 @@ import {
   styled,
   alpha,
   Grid,
+  Divider,
+  FormGroup,
+  FormControlLabel,
+  Checkbox,
+  Typography,
+  Avatar,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import React from "react";
+import CourseCards from "../Components/CourseCards";
+import CoursesImg from "../Images/CourcesImg.jpeg";
+import Logo from "../Images/ScliqueLogo.png";
+import "../Styles/Learn.css";
 
 const darkTheme = createTheme({
   palette: {
     mode: "dark",
     primary: {
-      main: "#000000",
+      main: "#0277bd",
     },
     secondary: {
-      main: "#0277bd",
+      main: "#000000",
     },
   },
 });
 
-const drawerWidth = 300;
+const drawerWidth = 240;
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -69,37 +78,135 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
+const CourseAr = [
+  {
+    image: CoursesImg,
+    title: "Data Structures and Algorithms",
+    skills: "Data Structures, Algorithms, C++",
+    website: "Coursera",
+    link: "www.coursera.com",
+    likeCount: 104,
+  },
+  {
+    image: CoursesImg,
+    title: "Advanced Algorithms",
+    skills: "Algorithms",
+    website: "Udacity",
+    link: "www.udacity.com",
+    likeCount: 78,
+  },
+  {
+    image: CoursesImg,
+    title: "FrontEnd Development",
+    skills: "HTML, CSS, Javascript",
+    website: "Udacity",
+    link: "www.udacity.com",
+    likeCount: 143,
+  },
+  {
+    image: CoursesImg,
+    title: "Competative Programming",
+    skills: "Data Structures, Algorithms",
+    website: "Udemy",
+    link: "www.udmey.com",
+    likeCount: 87,
+  },
+];
+
 const Learn = (props) => {
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
       <Box sx={{ display: "flex" }}>
-        <Drawer
-          sx={{
-            width: drawerWidth,
-            flexShrink: 0,
-            "& .MuiDrawer-paper": {
+        <Box>
+          <Drawer
+            sx={{
               width: drawerWidth,
-              boxSizing: "border-box",
-              zIndex: -1,
-            },
-          }}
-          variant="permanent"
-          anchor="left"
-        >
-          <Toolbar sx={{ height: "80px" }} />
-          <Divider />
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ "aria-label": "search" }}
-            />
-          </Search>
-        </Drawer>
-        <Grid></Grid>
+              flexShrink: 0,
+              "& .MuiDrawer-paper": {
+                width: drawerWidth,
+                boxSizing: "border-box",
+                zIndex: 0,
+              },
+              padding: 3,
+            }}
+            variant="permanent"
+            anchor="left"
+          >
+            <Toolbar sx={{ height: "80px" }}>
+              <Avatar
+                src={Logo}
+                variant="circular"
+                sx={{
+                  bgcolor: "white",
+                  alignSelf: "center",
+                  marginLeft: 3,
+                  padding: 0.5,
+                }}
+                sizes="lg"
+              />
+              <Typography
+                variant="h5"
+                fontWeight={"bold"}
+                alignSelf="center"
+                sx={{ mx: 2 }}
+              >
+                Sclique
+              </Typography>
+            </Toolbar>
+            <Search>
+              <SearchIconWrapper>
+                <SearchIcon />
+              </SearchIconWrapper>
+              <StyledInputBase
+                placeholder="Search…"
+                inputProps={{ "aria-label": "search" }}
+              />
+            </Search>
+            <Divider variant="middle" sx={{ my: 3 }} />
+            <FormGroup>
+              <FormControlLabel
+                control={<Checkbox sx={{ marginLeft: 3 }} />}
+                label="Coursera"
+              />
+              <FormControlLabel
+                control={<Checkbox sx={{ marginLeft: 3 }} />}
+                label="Udacity"
+              />
+              <FormControlLabel
+                control={<Checkbox sx={{ marginLeft: 3 }} />}
+                label="Udemy"
+              />
+            </FormGroup>
+          </Drawer>
+        </Box>
+        <Box sx={{ height: "100%", width: "100%", padding: "40px" }}>
+          <Grid
+            container
+            direction="row"
+            spacing={3}
+            alignItems="stretch"
+            justifyContent="left"
+          >
+            {CourseAr.map((course, index) => (
+              <Grid item xs={12} md={6} lg={4} key={index}>
+                <CourseCards {...course}></CourseCards>
+              </Grid>
+            ))}
+            {/* <Grid item xs={12} md={6} lg={4}>
+              <CourseCards></CourseCards>
+            </Grid>
+            <Grid item xs={12} md={6} lg={4}>
+              <CourseCards></CourseCards>
+            </Grid>
+            <Grid item xs={12} md={6} lg={4}>
+              <CourseCards></CourseCards>
+            </Grid>
+            <Grid item xs={12} md={6} lg={4}>
+              <CourseCards></CourseCards>
+            </Grid> */}
+          </Grid>
+        </Box>
       </Box>
     </ThemeProvider>
   );

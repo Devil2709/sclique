@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Paper from "@mui/material/Paper";
-import { Avatar, createTheme, ThemeProvider } from "@mui/material";
+import { Avatar, createTheme, ThemeProvider, Typography } from "@mui/material";
 import Logo from "../Images/ScliqueLogo.png";
 import { Link, useLocation, matchPath } from "react-router-dom";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -71,16 +71,34 @@ export default function NavBar() {
         <Avatar
           src={Logo}
           variant="circular"
-          sx={{ bgcolor: "white", alignSelf: "center", mx: 3, padding: 0.5 }}
+          sx={{
+            bgcolor: "white",
+            alignSelf: "center",
+            marginLeft: 3,
+            padding: 0.5,
+          }}
           sizes="lg"
         />
+        <Typography
+          variant="h5"
+          fontWeight={"bold"}
+          alignSelf="center"
+          sx={{ mx: 2 }}
+        >
+          Sclique
+        </Typography>
         <Box
           sx={{
             display: "flex",
             marginLeft: "auto",
           }}
         >
-          <Tabs value={currentTab} aria-label="nav tab" color="#424242  ">
+          <Tabs
+            value={currentTab}
+            aria-label="nav tab"
+            color="#424242"
+            sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
+          >
             <LinkTab label="Home" to="/home" value="/home" />
             <LinkTab label="Learn" to="/learn" value="/learn" />
             <LinkTab label="Challenges" to="/challenges" value="/challenges" />

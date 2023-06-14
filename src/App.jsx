@@ -4,10 +4,14 @@ import Challenges from "./Pages/Challenges";
 import Home from "./Pages/Home";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import Learn from "./Pages/Learn";
+import { Helmet } from "react-helmet";
 
 function App() {
   return (
     <div className="App">
+      <Helmet>
+        <style>{"body { background-color: black; }"}</style>
+      </Helmet>
       <BrowserRouter>
         <Routes>
           <Route
