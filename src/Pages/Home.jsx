@@ -1,8 +1,10 @@
 import React from "react";
 import "../Styles/Home.css";
-import { AspectRatio, Box, Button, Typography } from "@mui/joy";
+import { AspectRatio, Box, Button, Stack, Typography } from "@mui/joy";
 import { Link } from "react-router-dom";
 import Background from "../Images/backgrnd.png";
+import { Avatar } from "@mui/material";
+import Logo from "../Images/ScliqueLogo.png";
 
 const Home = (props) => {
   return (
@@ -59,7 +61,7 @@ const Home = (props) => {
               height: "60px",
               marginRight: "10px",
               fontSize: 20,
-              // bgcolor: "#0277bd",
+              bgcolor: "#0277bd",
             }}
           >
             Login
@@ -70,7 +72,7 @@ const Home = (props) => {
               height: "60px",
               marginLeft: "10px",
               fontSize: 20,
-              // bgcolor: "#0277bd",
+              bgcolor: "#0277bd",
             }}
             color="primary"
             component={Link}
@@ -80,13 +82,37 @@ const Home = (props) => {
           </Button>
         </Box>
       </Box>
-      <AspectRatio
-        variant="plain"
-        ratio="4/3"
-        sx={{ borderRadius: "md", width: 600, alignSelf: "center" }}
-      >
-        <img src={Background} alt="back" />
-      </AspectRatio>
+      <Box alignSelf="center">
+        <Stack
+          flexDirection="row"
+          justifyContent="center"
+          gap={2}
+          alignContent="center"
+          marginBottom={4}
+        >
+          <Avatar
+            src={Logo}
+            variant="circular"
+            sx={{
+              bgcolor: "white",
+              height: 30,
+              width: 30,
+              alignSelf: "center",
+              padding: 1,
+            }}
+          />
+          <Typography level="h1" textColor="common.white">
+            Sclique
+          </Typography>
+        </Stack>
+        <AspectRatio
+          variant="plain"
+          ratio="4/3"
+          sx={{ borderRadius: "md", width: 600, alignSelf: "center" }}
+        >
+          <img src={Background} alt="back" />
+        </AspectRatio>
+      </Box>
     </div>
   );
 };
