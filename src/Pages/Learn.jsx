@@ -13,14 +13,11 @@ import {
   FormGroup,
   FormControlLabel,
   Checkbox,
-  Typography,
-  Avatar,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import React from "react";
 import CourseCards from "../Components/CourseCards";
 import CoursesImg from "../Images/CourcesImg.jpeg";
-import Logo from "../Images/ScliqueLogo.png";
 import "../Styles/Learn.css";
 
 const darkTheme = createTheme({
@@ -133,27 +130,7 @@ const Learn = (props) => {
             variant="permanent"
             anchor="left"
           >
-            <Toolbar sx={{ height: "80px" }}>
-              <Avatar
-                src={Logo}
-                variant="circular"
-                sx={{
-                  bgcolor: "white",
-                  alignSelf: "center",
-                  marginLeft: 3,
-                  padding: 0.5,
-                }}
-                sizes="lg"
-              />
-              <Typography
-                variant="h5"
-                fontWeight={"bold"}
-                alignSelf="center"
-                sx={{ mx: 2 }}
-              >
-                Sclique
-              </Typography>
-            </Toolbar>
+            <Toolbar sx={{ height: "80px" }} />
             <Search>
               <SearchIconWrapper>
                 <SearchIcon />

@@ -1,10 +1,11 @@
 import "./App.css";
+import { Helmet } from "react-helmet";
+import { Routes, Route, BrowserRouter } from "react-router-dom";
 import NavBar from "./Components/NavBar";
 import Challenges from "./Pages/Challenges";
 import Home from "./Pages/Home";
-import { Routes, Route, BrowserRouter } from "react-router-dom";
+import SignUp from "./Pages/SignUp";
 import Learn from "./Pages/Learn";
-import { Helmet } from "react-helmet";
 
 function App() {
   return (
@@ -24,11 +25,13 @@ function App() {
             }
           />
           <Route path="home" element={<Home />} />
+          <Route path="signup" element={<SignUp />} />
           <Route
             path="learn"
             element={
               <div>
                 <NavBar />
+                <section className="header" style={{ height: "80px" }} />
                 <Learn />
               </div>
             }
@@ -38,6 +41,7 @@ function App() {
             element={
               <div>
                 <NavBar />
+                <section className="header" style={{ height: "80px" }} />
                 <Challenges />
               </div>
             }
@@ -47,6 +51,7 @@ function App() {
             element={
               <div>
                 <NavBar />
+                <section className="header" style={{ height: "80px" }} />
                 <Challenges />
               </div>
             }

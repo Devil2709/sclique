@@ -12,6 +12,7 @@ const Home = (props) => {
         display: "flex",
         justifyContent: "space-around",
         background: "black",
+        padding: 10,
       }}
     >
       <Box
@@ -58,6 +59,7 @@ const Home = (props) => {
               height: "60px",
               marginRight: "10px",
               fontSize: 20,
+              // bgcolor: "#0277bd",
             }}
           >
             Login
@@ -68,7 +70,9 @@ const Home = (props) => {
               height: "60px",
               marginLeft: "10px",
               fontSize: 20,
+              // bgcolor: "#0277bd",
             }}
+            color="primary"
             component={Link}
             to="/signup"
           >
