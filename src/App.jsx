@@ -20,8 +20,7 @@ function App() {
             path="/"
             element={
               <div>
-                <NavBar />
-                <Challenges />
+                <Home />
               </div>
             }
           />
