@@ -6,6 +6,7 @@ import Challenges from "./Pages/Challenges";
 import Home from "./Pages/Home";
 import SignUp from "./Pages/SignUp";
 import Learn from "./Pages/Learn";
+import LogIn from "./Pages/LogIn";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           />
           <Route path="home" element={<Home />} />
           <Route path="signup" element={<SignUp />} />
+          <Route path="login" element={<LogIn />} />
           <Route
             path="learn"
             element={

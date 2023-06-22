@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "@fontsource/roboto/400.css";
 import {
   Card,
@@ -23,6 +23,16 @@ const darkTheme = createTheme({
 });
 
 const CourseCards = (props) => {
+  const [likeCount, setLikeCount] = useState(props.likeCount);
+
+  const handleChange = (event) => {
+    if (event.target.checked) {
+      setLikeCount(likeCount + 1);
+    } else {
+      setLikeCount(likeCount - 1);
+    }
+  };
+
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
@@ -91,13 +101,14 @@ const CourseCards = (props) => {
             {...label}
             icon={<FavoriteBorder />}
             checkedIcon={<Favorite />}
+            onChange={handleChange}
           />
           <Typography
             align="left"
             variant="body1"
             sx={{ color: "#7B7B7B", fontWeight: "bold" }}
           >
-            {props.likeCount}
+            {likeCount}
           </Typography>
         </Stack>
       </Card>

@@ -15,7 +15,7 @@ import {
   Checkbox,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-import React, { useState } from "react";
+import React from "react";
 import CourseCards from "../Components/CourseCards";
 import CoursesImg from "../Images/CourcesImg.jpeg";
 import "../Styles/Learn.css";
