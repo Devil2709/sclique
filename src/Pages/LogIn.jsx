@@ -126,6 +126,7 @@ export default function LogIn() {
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
+                href="learn"
               >
                 Log In
               </Button>

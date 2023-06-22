@@ -156,6 +156,7 @@ export default function SignUp() {
                 type="submit"
                 fullWidth
                 variant="contained"
+                href="learn"
                 sx={{ mt: 3, mb: 2 }}
               >
                 Sign Up
