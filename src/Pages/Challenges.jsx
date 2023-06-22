@@ -11,7 +11,7 @@ import LeetCodeLogo from "../Images/LeetCodeLogo.jpeg";
 import AtCoderLogo from "../Images/AtCoderLogo.png";
 import ContestCard from "../Components/ContestCard";
 import { Box, Divider } from "@mui/material";
-import AutoSwipeView from "../Components/AutoSwipeView";
+import SlideShow from "../Components/SlideShow";
 
 var ChallengesAr = [
   {
@@ -65,7 +65,7 @@ const Challenges = () => {
   return (
     <Box className="Back">
       <Box className="banner_back" flexGrow={1}>
-        <AutoSwipeView arr={ChallengesAr} />
+        <SlideShow arr={ChallengesAr} />
       </Box>
       <Box style={{ padding: "40px" }}>
         <h1 className="Challenges-header" align="left">

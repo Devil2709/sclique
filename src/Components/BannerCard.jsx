@@ -13,7 +13,6 @@ const BannerCard = (props) => {
     <Card
       variant="outline"
       sx={{
-        transition: "0.2s ease",
         background: "#262626",
         overflow: "auto",
         display: "flex",
