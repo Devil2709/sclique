@@ -170,18 +170,6 @@ const Learn = (props) => {
                 <CourseCards {...course}></CourseCards>
               </Grid>
             ))}
-            {/* <Grid item xs={12} md={6} lg={4}>
-              <CourseCards></CourseCards>
-            </Grid>
-            <Grid item xs={12} md={6} lg={4}>
-              <CourseCards></CourseCards>
-            </Grid>
-            <Grid item xs={12} md={6} lg={4}>
-              <CourseCards></CourseCards>
-            </Grid>
-            <Grid item xs={12} md={6} lg={4}>
-              <CourseCards></CourseCards>
-            </Grid> */}
           </Grid>
         </Box>
       </Box>
