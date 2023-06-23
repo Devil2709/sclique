@@ -18,13 +18,21 @@ const BannerCard = (props) => {
         display: "flex",
       }}
     >
-      <CardMedia
-        component="img"
-        sx={{ width: 400, height: 400 }}
-        image={props.image}
-        alt="Coding Contest"
-      ></CardMedia>
-      <CardActionArea>
+      <CardActionArea
+        sx={{
+          width: "100%",
+          overflow: "auto",
+          display: "flex",
+          justifyContent: "flex-start",
+        }}
+      >
+        <CardMedia
+          component="img"
+          sx={{ width: 400, height: 400 }}
+          image={props.image}
+          alt="Coding Contest"
+        ></CardMedia>
+
         <CardContent sx={{ alignItems: "center" }}>
           <Typography textAlign="left" variant="h3" marginLeft={2}>
             <Link
@@ -37,7 +45,7 @@ const BannerCard = (props) => {
             </Link>
           </Typography>
           <Typography
-            variant="h6"
+            variant="h5"
             color="#e0e0e0"
             textAlign={"left"}
             my={1}

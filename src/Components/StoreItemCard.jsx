@@ -27,11 +27,11 @@ const StoreItemCard = (props) => {
         variant="outlined"
         key={props.key}
         sx={{
-          minWidth: "330px",
+          minWidth: "300px",
           borderWidth: 2,
           margin: 1,
           borderRadius: "10px",
-          minHeight: "240px",
+          minHeight: "270px",
           boxShadow: "md",
           transition: "0.2s ease",
           overflow: "auto",
@@ -45,17 +45,18 @@ const StoreItemCard = (props) => {
         <CardActionArea href={props.link} target="_blank">
           <CardMedia
             component="img"
-            height="180"
+            height="300px"
             image={props.image}
-            alt="Coding Contest"
+            alt="Product Image"
+            sx={{ objectFit: "scale-down", backgroundColor: "#ffffff" }}
           />
           <CardContent sx={{ justifyContent: "flex-end" }}>
             <Typography
               align="left"
               gutterBottom
               color="white"
-              variant="h6"
-              sx={{ my: 1, fontWeight: "bold", color: "#e0e0e0" }}
+              variant="h5"
+              sx={{ mt: 1, mb: 2, fontWeight: "bold", color: "#e0e0e0" }}
             >
               {props.title}
             </Typography>
@@ -63,11 +64,16 @@ const StoreItemCard = (props) => {
               <Avatar
                 src="https://cdn-icons-png.flaticon.com/128/2933/2933116.png"
                 alt="currency"
+                sx={{ height: 30, width: 30, alignSelf: "center", mr: "2px" }}
               />
               <Typography
                 align="left"
                 variant="h6"
-                sx={{ color: "#FFFFFF", fontWeight: "bold" }}
+                sx={{
+                  color: "#FFFFFF",
+                  fontWeight: "bold",
+                  alignSelf: "center",
+                }}
               >
                 {props.cost}
               </Typography>

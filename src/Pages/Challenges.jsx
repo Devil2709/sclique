@@ -34,6 +34,27 @@ var ChallengesAr = [
   },
 ];
 
+var BannerAr = [
+  {
+    title: "Coding Challenge",
+    image: CodingImg,
+    description: "08 June 2023",
+    credit: 200,
+  },
+  {
+    title: "Logical Reasoning Challenge",
+    image: LogicalImg,
+    description: "09 June 2023",
+    credit: 100,
+  },
+  {
+    title: "CS Fundamentals Challenge",
+    image: CSFundamentalImg,
+    description: "10 June 2023",
+    credit: 80,
+  },
+];
+
 var ContestAr = [
   {
     title: "Codeforces Round #874",
@@ -65,7 +86,7 @@ const Challenges = () => {
   return (
     <Box className="Back">
       <Box className="banner_back" flexGrow={1}>
-        <SlideShow arr={ChallengesAr} />
+        <SlideShow arr={BannerAr} />
       </Box>
       <Box style={{ padding: "40px" }}>
         <h1 className="Challenges-header" align="left">

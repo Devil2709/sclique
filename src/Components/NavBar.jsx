@@ -92,7 +92,7 @@ export default function NavBar() {
               sx={{
                 bgcolor: "white",
                 alignSelf: "center",
-                marginLeft: 3,
+                marginLeft: "20px",
                 padding: 0.5,
               }}
               sizes="lg"

@@ -11,14 +11,15 @@ const SlideShow = (props) => {
       slidesToShow={1}
       autoplay={true}
       arrows={false}
-      duration={3000}
+      duration={4000}
+      pauseOnHover={false}
       transitionDuration={800}
     >
       {ChallengesAr.map((step, index) => (
         <BannerCard
           title={step.title}
           image={step.image}
-          description={step.date}
+          description={step.description}
           key={index}
         />
       ))}
