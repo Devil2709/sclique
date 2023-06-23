@@ -7,6 +7,11 @@ import {
   Avatar,
   Container,
   createTheme,
+  Divider,
+  IconButton,
+  ListItemIcon,
+  Menu,
+  MenuItem,
   ThemeProvider,
   Toolbar,
   Typography,
@@ -14,6 +19,7 @@ import {
 import Logo from "../Images/ScliqueLogo.png";
 import { Link, useLocation, matchPath } from "react-router-dom";
 import CssBaseline from "@mui/material/CssBaseline";
+import { Logout, Settings } from "@mui/icons-material";
 
 const darkTheme = createTheme({
   palette: {
@@ -63,6 +69,17 @@ export default function NavBar() {
   const currentTab = routeMatch?.pattern?.path;
   console.log(currentTab);
 
+  const [anchorEle, setAnchorEle] = React.useState(null);
+  const open = Boolean(anchorEle);
+
+  const handleClose = () => {
+    setAnchorEle(null);
+  };
+
+  const handleClick = (event) => {
+    setAnchorEle(event.currentTarget);
+  };
+
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
@@ -109,7 +126,78 @@ export default function NavBar() {
                 />
                 <LinkTab label="Store" to="/store" value="/store" />
               </Tabs>
-              <Avatar sx={{ alignSelf: "center", mx: 5 }} />
+              <Divider
+                orientation="vertical"
+                role="presentation"
+                variant="middle"
+                sx={{ height: "50px", mx: 4, alignSelf: "center" }}
+              />
+              <IconButton
+                onClick={handleClick}
+                aria-controls={open ? "account-menu" : undefined}
+                aria-haspopup="true"
+                aria-expanded={open ? "true" : undefined}
+                sx={{
+                  height: 50,
+                  width: 50,
+                  alignSelf: "center",
+                  mr: 1,
+                }}
+              >
+                <Avatar />
+              </IconButton>
+              <Menu
+                anchorEl={anchorEle}
+                id="account-menu"
+                open={open}
+                onClose={handleClose}
+                onClick={handleClose}
+                PaperProps={{
+                  elevation: 0,
+                  sx: {
+                    overflow: "visible",
+                    filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
+                    mt: 1.5,
+                    "& .MuiAvatar-root": {
+                      width: 32,
+                      height: 32,
+                      ml: -0.5,
+                      mr: 1,
+                    },
+                    "&:before": {
+                      content: '""',
+                      display: "block",
+                      position: "absolute",
+                      top: 0,
+                      right: 14,
+                      width: 10,
+                      height: 10,
+                      bgcolor: "background.paper",
+                      transform: "translateY(-50%) rotate(45deg)",
+                      zIndex: 0,
+                    },
+                  },
+                }}
+                transformOrigin={{ horizontal: "right", vertical: "top" }}
+                anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+              >
+                <MenuItem onClick={handleClose}>
+                  <Avatar /> My account
+                </MenuItem>
+                <Divider />
+                <MenuItem onClick={handleClose}>
+                  <ListItemIcon>
+                    <Settings fontSize="small" />
+                  </ListItemIcon>
+                  Settings
+                </MenuItem>
+                <MenuItem onClick={handleClose}>
+                  <ListItemIcon>
+                    <Logout fontSize="small" />
+                  </ListItemIcon>
+                  Logout
+                </MenuItem>
+              </Menu>
             </Box>
           </Toolbar>
         </Container>

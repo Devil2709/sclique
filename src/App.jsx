@@ -7,6 +7,7 @@ import Home from "./Pages/Home";
 import SignUp from "./Pages/SignUp";
 import Learn from "./Pages/Learn";
 import LogIn from "./Pages/LogIn";
+import Store from "./Pages/Store";
 
 function App() {
   return (
@@ -53,7 +54,7 @@ function App() {
               <div>
                 <NavBar />
                 <section className="header" style={{ height: "80px" }} />
-                <Challenges />
+                <Store />
               </div>
             }
           />
