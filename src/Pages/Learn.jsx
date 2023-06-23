@@ -15,7 +15,7 @@ import {
   Checkbox,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-import React from "react";
+import React, { useState } from "react";
 import CourseCards from "../Components/CourseCards";
 import CoursesImg from "../Images/CourcesImg.jpeg";
 import "../Styles/Learn.css";
@@ -110,7 +110,31 @@ const CourseAr = [
   },
 ];
 
+CourseAr.sort(function (a, b) {
+  return b.likeCount - a.likeCount;
+});
+
+console.log(CourseAr);
+
+let initialFilter = new Set(["Coursera", "Udacity", "Udemy"]);
+
 const Learn = (props) => {
+  const [filter, setFilter] = useState(initialFilter);
+  const filteredCourses = CourseAr.filter((item) => {
+    return filter.has(item.website);
+  });
+
+  const onFilterChange = (event, label) => {
+    if (event.target.checked) {
+      setFilter((filter) => new Set(filter.add(label)));
+    } else {
+      setFilter((filter) => {
+        filter.delete(label);
+        return new Set(filter);
+      });
+    }
+  };
+
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
@@ -129,6 +153,7 @@ const Learn = (props) => {
             }}
             variant="permanent"
             anchor="left"
+            arr={CourseAr}
           >
             <Toolbar sx={{ height: "80px" }} />
             <Search>
@@ -143,15 +168,33 @@ const Learn = (props) => {
             <Divider variant="middle" sx={{ my: 3 }} />
             <FormGroup>
               <FormControlLabel
-                control={<Checkbox sx={{ marginLeft: 3 }} />}
+                control={
+                  <Checkbox
+                    sx={{ marginLeft: 3 }}
+                    defaultChecked
+                    onChange={(event) => onFilterChange(event, "Coursera")}
+                  />
+                }
                 label="Coursera"
               />
               <FormControlLabel
-                control={<Checkbox sx={{ marginLeft: 3 }} />}
+                control={
+                  <Checkbox
+                    sx={{ marginLeft: 3 }}
+                    defaultChecked
+                    onChange={(event) => onFilterChange(event, "Udacity")}
+                  />
+                }
                 label="Udacity"
               />
               <FormControlLabel
-                control={<Checkbox sx={{ marginLeft: 3 }} />}
+                control={
+                  <Checkbox
+                    sx={{ marginLeft: 3 }}
+                    defaultChecked
+                    onChange={(event) => onFilterChange(event, "Udemy")}
+                  />
+                }
                 label="Udemy"
               />
             </FormGroup>
@@ -165,7 +208,7 @@ const Learn = (props) => {
             alignItems="stretch"
             justifyContent="left"
           >
-            {CourseAr.map((course, index) => (
+            {filteredCourses.map((course, index) => (
               <Grid item xs={12} md={6} lg={4} key={index}>
                 <CourseCards {...course}></CourseCards>
               </Grid>

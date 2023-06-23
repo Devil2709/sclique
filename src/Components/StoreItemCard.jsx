@@ -45,10 +45,10 @@ const StoreItemCard = (props) => {
         <CardActionArea href={props.link} target="_blank">
           <CardMedia
             component="img"
-            height="300px"
+            height="270px"
             image={props.image}
             alt="Product Image"
-            sx={{ objectFit: "scale-down", backgroundColor: "#ffffff" }}
+            sx={{ objectFit: "contain", backgroundColor: "#ffffff" }}
           />
           <CardContent sx={{ justifyContent: "flex-end" }}>
             <Typography

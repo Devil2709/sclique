@@ -58,7 +58,7 @@ const CourseCards = (props) => {
         <CardActionArea href={props.link} target="_blank">
           <CardMedia
             component="img"
-            height="180"
+            height="200"
             image={props.image}
             alt="Coding Contest"
           />
@@ -71,22 +71,23 @@ const CourseCards = (props) => {
             >
               {props.title}
             </Typography>
-            <Typography
-              align="left"
-              variant="body1"
-              sx={{ my: 1, fontWeight: "bold", color: "#e0e0e0" }}
-            >
-              {"Skills: "}
+            <Stack>
               <Typography
-                display="inline"
                 align="left"
                 variant="body1"
-                sx={{ my: 1, color: "#e0e0e0" }}
+                sx={{ my: 1, fontWeight: "bold", color: "#e0e0e0" }}
               >
-                {props.skills}
+                {"Skills: "}
+                <Typography
+                  display="inline"
+                  align="left"
+                  variant="body1"
+                  sx={{ my: 1, color: "#e0e0e0" }}
+                >
+                  {props.skills}
+                </Typography>
               </Typography>
-            </Typography>
-
+            </Stack>
             <Typography
               align="left"
               variant="body1"
@@ -96,7 +97,7 @@ const CourseCards = (props) => {
             </Typography>
           </CardContent>
         </CardActionArea>
-        <Stack direction="row" alignItems="center" padding={1}>
+        <Stack direction="row" alignItems="center" padding={1} paddingTop={0}>
           <Checkbox
             {...label}
             icon={<FavoriteBorder />}

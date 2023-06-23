@@ -110,7 +110,7 @@ const Store = (props) => {
           <Grid
             container
             direction="row"
-            spacing={3}
+            spacing={2}
             alignItems="stretch"
             justifyContent="left"
           >
