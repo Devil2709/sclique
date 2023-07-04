@@ -10,6 +10,7 @@ import {
   Typography,
   Stack,
   Checkbox,
+  CardActions,
 } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 import { Favorite, FavoriteBorder } from "@mui/icons-material";
@@ -23,6 +24,7 @@ const darkTheme = createTheme({
 });
 
 const CourseCards = (props) => {
+  console.log(props);
   const [likeCount, setLikeCount] = useState(props.likeCount);
 
   const handleChange = (event) => {
@@ -75,31 +77,24 @@ const CourseCards = (props) => {
               <Typography
                 align="left"
                 variant="body1"
-                sx={{ my: 1, fontWeight: "bold", color: "#e0e0e0" }}
+                sx={{ fontWeight: "bold", color: "#e0e0e0" }}
               >
-                {"Skills: "}
-                <Typography
-                  display="inline"
-                  align="left"
-                  variant="body1"
-                  sx={{ my: 1, color: "#e0e0e0" }}
-                >
-                  {props.skills}
-                </Typography>
+                <b>Skills: </b> {props.skills}
               </Typography>
             </Stack>
             <Typography
               align="left"
               variant="body1"
-              sx={{ color: "#7B7B7B", fontWeight: "bold" }}
+              sx={{ color: "#7B7B7B", fontWeight: "bold", mt: 1 }}
             >
               {props.website}
             </Typography>
           </CardContent>
         </CardActionArea>
-        <Stack direction="row" alignItems="center" padding={1} paddingTop={0}>
+        <CardActions>
           <Checkbox
             {...label}
+            id={`like_check_${props.id}`}
             icon={<FavoriteBorder />}
             checkedIcon={<Favorite />}
             onChange={handleChange}
@@ -111,7 +106,7 @@ const CourseCards = (props) => {
           >
             {likeCount}
           </Typography>
-        </Stack>
+        </CardActions>
       </Card>
     </ThemeProvider>
   );

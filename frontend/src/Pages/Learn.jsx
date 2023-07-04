@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import {
   Box,
   CssBaseline,
@@ -13,9 +14,9 @@ import {
   FormGroup,
   FormControlLabel,
   Checkbox,
+  Typography,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-import React, { useState } from "react";
 import CourseCards from "../Components/CourseCards";
 import CoursesImg from "../Images/CourcesImg.jpeg";
 import "../Styles/Learn.css";
@@ -44,7 +45,6 @@ const Search = styled("div")(({ theme }) => ({
   marginTop: theme.spacing(3),
   marginRight: theme.spacing(3),
   marginLeft: 0,
-  width: "100%",
   [theme.breakpoints.up("sm")]: {
     marginLeft: theme.spacing(3),
     width: "auto",
@@ -68,7 +68,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create("width"),
-    width: "100%",
     [theme.breakpoints.up("md")]: {
       width: "20ch",
     },
@@ -161,16 +160,34 @@ const Learn = (props) => {
                 <SearchIcon />
               </SearchIconWrapper>
               <StyledInputBase
+                id="search_input"
                 placeholder="Search…"
                 inputProps={{ "aria-label": "search" }}
               />
             </Search>
             <Divider variant="middle" sx={{ my: 3 }} />
-            <FormGroup>
+            <Typography
+              variant="h6"
+              textAlign="left"
+              fontWeight="bold"
+              sx={{ mx: 3 }}
+            >
+              Filters
+            </Typography>
+            <Divider variant="middle" sx={{ my: 2 }} />
+            <FormGroup sx={{ px: 3, py: 1 }}>
+              <Typography
+                variant="body2"
+                fontWeight="bold"
+                textAlign="left"
+                sx={{ mb: 1 }}
+              >
+                WEBSITE
+              </Typography>
               <FormControlLabel
                 control={
                   <Checkbox
-                    sx={{ marginLeft: 3 }}
+                    id="coursera_filter"
                     defaultChecked
                     onChange={(event) => onFilterChange(event, "Coursera")}
                   />
@@ -180,7 +197,7 @@ const Learn = (props) => {
               <FormControlLabel
                 control={
                   <Checkbox
-                    sx={{ marginLeft: 3 }}
+                    id="udacity_filter"
                     defaultChecked
                     onChange={(event) => onFilterChange(event, "Udacity")}
                   />
@@ -190,7 +207,7 @@ const Learn = (props) => {
               <FormControlLabel
                 control={
                   <Checkbox
-                    sx={{ marginLeft: 3 }}
+                    id="udemy_filter"
                     defaultChecked
                     onChange={(event) => onFilterChange(event, "Udemy")}
                   />
@@ -208,11 +225,14 @@ const Learn = (props) => {
             alignItems="stretch"
             justifyContent="left"
           >
-            {filteredCourses.map((course, index) => (
-              <Grid item xs={12} md={6} lg={4} key={index}>
-                <CourseCards {...course}></CourseCards>
-              </Grid>
-            ))}
+            {filteredCourses.map((course, index) => {
+              course.id = index;
+              return (
+                <Grid item xs={12} md={6} lg={4} key={index}>
+                  <CourseCards {...course}></CourseCards>
+                </Grid>
+              );
+            })}
           </Grid>
         </Box>
       </Box>

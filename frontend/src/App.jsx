@@ -1,5 +1,5 @@
 import "./App.css";
-import { Helmet } from "react-helmet";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import NavBar from "./Components/NavBar";
 import Challenges from "./Pages/Challenges";
@@ -8,13 +8,16 @@ import SignUp from "./Pages/SignUp";
 import Learn from "./Pages/Learn";
 import LogIn from "./Pages/LogIn";
 import Store from "./Pages/Store";
+import Discussion from "./Pages/Discussion";
 
 function App() {
   return (
     <div className="App">
-      <Helmet>
-        <style>{"body { background-color: black; }"}</style>
-      </Helmet>
+      <HelmetProvider>
+        <Helmet>
+          <style>{"body { background-color: black; }"}</style>
+        </Helmet>
+      </HelmetProvider>
       <BrowserRouter>
         <Routes>
           <Route
@@ -55,6 +58,16 @@ function App() {
                 <NavBar />
                 <section className="header" style={{ height: "80px" }} />
                 <Store />
+              </div>
+            }
+          />
+          <Route
+            path="discuss"
+            element={
+              <div>
+                <NavBar />
+                <section className="header" style={{ height: "80px" }} />
+                <Discussion />
               </div>
             }
           />

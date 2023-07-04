@@ -14,6 +14,9 @@ import {
   Checkbox,
 } from "@mui/material";
 import Logo from "../Images/ScliqueLogo.png";
+import { useSignup } from "../hooks/useSignup";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Copyright(props) {
   return (
@@ -48,13 +51,19 @@ const darkTheme = createTheme({
 });
 
 export default function SignUp() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [username, setUsername] = useState("");
+  const [submitted, setSubmitted] = useState("");
+  const { signup, isLoading, error, link } = useSignup(null);
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setSubmitted(true);
+    await signup(email, password, firstName, lastName, username);
   };
 
   return (
@@ -110,6 +119,8 @@ export default function SignUp() {
                     id="firstName"
                     label="First Name"
                     autoFocus
+                    onChange={(e) => setFirstName(e.target.value)}
+                    value={firstName}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -119,6 +130,8 @@ export default function SignUp() {
                     label="Last Name"
                     name="lastName"
                     autoComplete="family-name"
+                    onChange={(e) => setLastName(e.target.value)}
+                    value={lastName}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -129,6 +142,8 @@ export default function SignUp() {
                     label="Username"
                     name="username"
                     autoComplete="username"
+                    onChange={(e) => setUsername(e.target.value)}
+                    value={username}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -150,12 +165,18 @@ export default function SignUp() {
                     type="password"
                     id="password"
                     autoComplete="new-password"
+                    onChange={(e) => setPassword(e.target.value)}
+                    value={password}
                   />
                 </Grid>
                 <Grid item xs={12}>
                   <FormControlLabel
                     control={
-                      <Checkbox value="allowExtraEmails" color="primary" />
+                      <Checkbox
+                        id="signup_check"
+                        value="allowExtraEmails"
+                        color="primary"
+                      />
                     }
                     label="I want to receive inspiration, marketing promotions and updates via email."
                   />
@@ -165,11 +186,13 @@ export default function SignUp() {
                 type="submit"
                 fullWidth
                 variant="contained"
-                href="learn"
+                disabled={isLoading}
                 sx={{ mt: 3, mb: 2 }}
               >
                 Sign Up
               </Button>
+              {error && <div>{error}</div>}
+              {link && navigate(link)}
               <Grid container justifyContent="flex-end">
                 <Grid item>
                   <Link href="login" variant="body2">
