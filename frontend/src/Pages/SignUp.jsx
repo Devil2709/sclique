@@ -154,6 +154,8 @@ export default function SignUp() {
                     label="Email Address"
                     name="email"
                     autoComplete="email"
+                    onChange={(e) => setEmail(e.target.value)}
+                    value={email}
                   />
                 </Grid>
                 <Grid item xs={12}>
