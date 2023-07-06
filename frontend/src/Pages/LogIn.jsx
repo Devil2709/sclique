@@ -12,6 +12,9 @@ import {
   Avatar,
 } from "@mui/material";
 import Logo from "../Images/ScliqueLogo.png";
+import { useState } from "react";
+import { useSignin } from "../hooks/useSignin";
+import { useNavigate } from "react-router-dom";
 
 function Copyright(props) {
   return (
@@ -26,7 +29,6 @@ function Copyright(props) {
         Your Website
       </Link>{" "}
       {new Date().getFullYear()}
-      {"."}
     </Typography>
   );
 }
@@ -46,11 +48,16 @@ const darkTheme = createTheme({
 });
 
 export default function LogIn() {
-  const handleSubmit = (event) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [submitted, setSubmitted] = useState("");
+  const { signin, isLoading, error, link } = useSignin(null);
+  const navigate = useNavigate();
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    const email = data.get("email");
-    const password = data.get("password");
+    setSubmitted(true);
+    await signin(email, password);
   };
 
   return (
@@ -105,6 +112,8 @@ export default function LogIn() {
                     label="Email Address"
                     name="email"
                     autoComplete="email"
+                    onChange={(e) => setEmail(e.target.value)}
+                    value={email}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -116,6 +125,8 @@ export default function LogIn() {
                     type="password"
                     id="password"
                     autoComplete="new-password"
+                    onChange={(e) => setPassword(e.target.value)}
+                    value={password}
                   />
                 </Grid>
               </Grid>
@@ -124,10 +135,12 @@ export default function LogIn() {
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
-                href="learn"
+                disabled={isLoading}
               >
                 Log In
               </Button>
+              {error && <div>{error}</div>}
+              {link && navigate(link)}
               <Grid container justifyContent="flex-end">
                 <Grid item>
                   <Link href="signup" variant="body2">

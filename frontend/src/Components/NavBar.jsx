@@ -20,6 +20,8 @@ import Logo from "../Images/ScliqueLogo.png";
 import { Link, useLocation, matchPath } from "react-router-dom";
 import CssBaseline from "@mui/material/CssBaseline";
 import { Logout, Settings } from "@mui/icons-material";
+import { useSignout } from "../hooks/useSignout";
+import { useNavigate } from "react-router-dom";
 
 const darkTheme = createTheme({
   palette: {
@@ -71,6 +73,8 @@ export default function NavBar() {
 
   const [anchorEle, setAnchorEle] = React.useState(null);
   const open = Boolean(anchorEle);
+  const { signout } = useSignout();
+  const navigate = useNavigate();
 
   const handleClose = () => {
     setAnchorEle(null);
@@ -78,6 +82,12 @@ export default function NavBar() {
 
   const handleClick = (event) => {
     setAnchorEle(event.currentTarget);
+  };
+
+  const handleLogout = (event) => {
+    signout();
+    navigate("/login");
+    handleClose();
   };
 
   return (
@@ -191,7 +201,7 @@ export default function NavBar() {
                   </ListItemIcon>
                   Settings
                 </MenuItem>
-                <MenuItem onClick={handleClose}>
+                <MenuItem onClick={handleLogout}>
                   <ListItemIcon>
                     <Logout fontSize="small" />
                   </ListItemIcon>
