@@ -2,42 +2,64 @@ import { AssignmentIndOutlined } from "@mui/icons-material";
 import {
   Avatar,
   Box,
+  Button,
   Card,
   CardActionArea,
   CardContent,
   CardHeader,
+  CardMedia,
   Container,
   createTheme,
   Divider,
   ThemeProvider,
   Typography,
 } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import CommentComp from "../Components/CommentComp";
-import DiscussionComp from "../Components/DiscussionComp";
+import { useNode } from "../hooks/useNode";
+import Background from "../Images/backgrnd.png";
+import CodingImg from "../Images/CodingImg.jpeg";
+import HoodieImg from "../Images/HoodieImg.jpeg";
 
 const darkTheme = createTheme({
   palette: {
     mode: "dark",
+    primary: {
+      main: "#0277bd",
+    },
+    secondary: {
+      main: "#000000",
+    },
+    info: {
+      main: "#eeeeee",
+    },
   },
 });
 
 const localCommmentAr = [
   {
+    id: 1,
     username: "Abhaumik1",
+    type: "com",
     text: "Comment1 asdfksjdfklasjf;lkasjdf;klsjkl skdf;aklsj klajfkldj saldkfj ;laskdj f;lasdj f;lksajd lkasjd ;lkasjd l;kcjf l;aksdj flks jf",
     commentAr: [
       {
+        id: 2,
         username: "Abhaumik2",
         text: "Comment2",
+        type: "com",
         commentAr: [
           {
+            id: 3,
             username: "Abhaumik2",
             text: "Comment2",
+            type: "com",
             commentAr: [
               {
+                id: 4,
                 username: "Abhaumik24",
                 text: "Comment3",
+                type: "com",
                 commentAr: [],
               },
             ],
@@ -47,12 +69,17 @@ const localCommmentAr = [
     ],
   },
   {
+    id: 5,
     username: "Abhaumik2",
     text: "Comment2",
+    type: "com",
+
     commentAr: [
       {
+        id: 6,
         username: "Abhaumik24",
         text: "Comment3",
+        type: "com",
         commentAr: [],
       },
     ],
@@ -60,6 +87,20 @@ const localCommmentAr = [
 ];
 
 const Discussion = (props) => {
+  const [rootComment, setRootComment] = useState({
+    id: "main",
+    username: "Abhaumik",
+    title: "Title1",
+    content: "Hello",
+    image: Background,
+    commentAr: localCommmentAr,
+  });
+  const { addComment } = useNode();
+
+  const handleNewComment = (commentId, newComment) => {
+    setRootComment(addComment(commentId, rootComment, newComment));
+  };
+
   return (
     <ThemeProvider theme={darkTheme}>
       <Container
@@ -72,67 +113,102 @@ const Discussion = (props) => {
         }}
       >
         <Box sx={{ width: "100%", px: 2 }}>
-          <DiscussionComp username="Abhaumik" title="Hello" content="Content" />
-          <Card
-            variant="outlined"
-            sx={{
-              borderWidth: 2,
-              borderRadius: "10px",
-              my: 3,
-              width: "100%",
-            }}
-          >
-            <CardContent>
-              <Box sx={{ mx: 2 }}>
-                {localCommmentAr.map((comment, ind) => {
-                  return <CommentComp {...comment} key={ind} />;
-                })}
-              </Box>
-            </CardContent>
-          </Card>
+          <CommentComp
+            comment={rootComment}
+            handleNewComment={handleNewComment}
+          />
         </Box>
         <Box sx={{ width: 500, mx: 2 }}>
           <Card
             variant="outlined"
-            sx={{ borderWidth: 2, borderRadius: "10px" }}
+            sx={{
+              minWidth: 300,
+              borderWidth: 2,
+              borderRadius: "10px",
+              mb: 2,
+            }}
           >
-            <CardHeader
-              avatar={
-                <Avatar sx={{ height: 30, width: 30, bgcolor: "#0277bd" }}>
-                  <AssignmentIndOutlined />
-                </Avatar>
-              }
-              title="Notice"
-              sx={{ textAlign: "left" }}
+            <CardMedia
+              component="img"
+              height={130}
+              src={CodingImg}
+              sx={{ objectFit: "cover" }}
             />
-            <Divider variant="middle" />
-            <CardActionArea>
-              <CardContent>
-                <Typography variant="h6">Conding Challenge</Typography>
-                <Typography variant="body1">Date...</Typography>
-              </CardContent>
-            </CardActionArea>
+            <CardContent>
+              <Typography variant="h5" textAlign="left">
+                <span style={{ color: "#0277bd", fontWeight: "bold" }}>
+                  Grow
+                </span>
+                <br /> With Challenges
+              </Typography>
+            </CardContent>
+            <Container
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+                alignItems: "stretch",
+                padding: 0,
+              }}
+            >
+              <Button
+                variant="contained"
+                color="primary"
+                sx={{
+                  mb: 2,
+                  height: "40px",
+                  borderRadius: "20px",
+                }}
+              >
+                Register
+              </Button>
+            </Container>
           </Card>
           <Card
             variant="outlined"
-            sx={{ borderWidth: 2, borderRadius: "10px", mt: 2 }}
+            sx={{
+              minWidth: 300,
+              borderWidth: 2,
+              borderRadius: "10px",
+              mb: 2,
+            }}
           >
-            <CardHeader
-              avatar={
-                <Avatar sx={{ height: 30, width: 30 }}>
-                  <AssignmentIndOutlined />
-                </Avatar>
-              }
-              title="Notice"
-              sx={{ textAlign: "left" }}
+            <CardMedia
+              component="img"
+              height={130}
+              src={HoodieImg}
+              sx={{ objectFit: "cover" }}
             />
-            <Divider variant="middle" />
-            <CardActionArea>
-              <CardContent>
-                <Typography variant="h6">Conding Challenge</Typography>
-                <Typography variant="body1">Date...</Typography>
-              </CardContent>
-            </CardActionArea>
+            <CardContent>
+              <Typography variant="h5" textAlign="left">
+                <span style={{ color: "#0277bd", fontWeight: "bold" }}>
+                  Win
+                </span>
+                <br /> Merchandise
+              </Typography>
+            </CardContent>
+            <Container
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+                alignItems: "stretch",
+                padding: 0,
+              }}
+            >
+              <Button
+                variant="contained"
+                color="primary"
+                href="/store"
+                sx={{
+                  mb: 2,
+                  height: "40px",
+                  borderRadius: "20px",
+                }}
+              >
+                Visit Store
+              </Button>
+            </Container>
           </Card>
         </Box>
       </Container>

@@ -86,7 +86,7 @@ export default function NavBar() {
 
   const handleLogout = (event) => {
     signout();
-    navigate("/login");
+    navigate("/home");
     handleClose();
   };
 

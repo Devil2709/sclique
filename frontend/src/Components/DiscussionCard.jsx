@@ -8,9 +8,11 @@ import {
 import {
   Avatar,
   Card,
+  CardActionArea,
   CardActions,
   CardContent,
   CardHeader,
+  CardMedia,
   Checkbox,
   createTheme,
   IconButton,
@@ -32,50 +34,69 @@ const DiscussionCard = (props) => {
         <Card
           variant="outlined"
           sx={{
-            margin: 4,
             borderWidth: 2,
             borderRadius: "10px",
           }}
         >
-          <CardHeader
-            avatar={<Avatar sx={{ height: 30, width: 30, bgcolor: "cyan" }} />}
-            title={props.username}
-            style={{ textAlign: "left", fontWeight: "bold" }}
-          />
-          <CardContent
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "flex-start",
-              paddingTop: 0,
+          <CardActionArea
+            onClick={() => {
+              console.log("card action");
             }}
           >
-            <Typography variant="h5" textAlign="left" fontWeight="bold">
-              {props.title}
-            </Typography>
-            <Typography variant="body1" textAlign="left" marginTop={1}>
-              {props.content}
-            </Typography>
-          </CardContent>
-          <CardActions sx={{ paddingLeft: 2 }}>
-            <Checkbox
-              aria-label="LikeCheck"
-              id={`like_check_${props.id}`}
-              icon={<ThumbUpOutlined />}
-              checkedIcon={<ThumbUpRounded />}
-              // onChange={}
+            <CardHeader
+              avatar={
+                <Avatar sx={{ height: 30, width: 30, bgcolor: "cyan" }} />
+              }
+              title={props.username}
+              style={{ textAlign: "left", fontWeight: "bold" }}
             />
-            <Checkbox
-              aria-label="LikeCheck"
-              id={`like_check_${props.id}`}
-              icon={<ThumbDownOutlined />}
-              checkedIcon={<ThumbDownRounded />}
-              // onChange={}
-            />
-            <IconButton sx={{ mx: 1 }} href="discuss">
-              <CommentOutlined color="action" />
-            </IconButton>
-          </CardActions>
+            <CardContent
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "flex-start",
+                paddingTop: 0,
+              }}
+            >
+              <Typography variant="h5" textAlign="left" fontWeight="bold">
+                {props.title}
+              </Typography>
+              <Typography variant="body1" textAlign="left" marginTop={1}>
+                {props.content}
+              </Typography>
+            </CardContent>
+            {props.image && (
+              <CardMedia
+                component="img"
+                src={props.image}
+                sx={{ padding: 2 }}
+                style={{ borderRadius: "30px" }}
+              />
+            )}
+
+            <CardActions sx={{ paddingLeft: 2 }}>
+              <Checkbox
+                aria-label="LikeCheck"
+                id={`like_check_${props.id}`}
+                icon={<ThumbUpOutlined />}
+                checkedIcon={<ThumbUpRounded />}
+                onChange={(event) => {
+                  event.stopPropagation();
+                  console.log("check changed");
+                }}
+              />
+              <Checkbox
+                aria-label="LikeCheck"
+                id={`like_check_${props.id}`}
+                icon={<ThumbDownOutlined />}
+                checkedIcon={<ThumbDownRounded />}
+                // onChange={}
+              />
+              <IconButton sx={{ mx: 1 }} href="discuss">
+                <CommentOutlined color="action" />
+              </IconButton>
+            </CardActions>
+          </CardActionArea>
         </Card>
       </div>
     </ThemeProvider>

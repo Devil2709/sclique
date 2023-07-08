@@ -28,7 +28,16 @@ function App() {
               </div>
             }
           />
-          <Route path="home" element={<Home />} />
+          <Route
+            path="home"
+            element={
+              <div>
+                <NavBar />
+                <section className="header" style={{ height: "80px" }} />
+                <Home />
+              </div>
+            }
+          />
           <Route path="signup" element={<SignUp />} />
           <Route path="login" element={<LogIn />} />
           <Route
