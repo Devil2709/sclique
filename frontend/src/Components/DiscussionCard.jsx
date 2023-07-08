@@ -28,6 +28,7 @@ const darkTheme = createTheme({
 });
 
 const DiscussionCard = (props) => {
+  let randomColor = Math.floor(Math.random() * 16777215).toString(16);
   return (
     <ThemeProvider theme={darkTheme}>
       <div>
@@ -45,7 +46,12 @@ const DiscussionCard = (props) => {
           >
             <CardHeader
               avatar={
-                <Avatar sx={{ height: 30, width: 30, bgcolor: "cyan" }} />
+                <Avatar
+                  sx={{ height: 30, width: 30, bgcolor: "#" + randomColor }}
+                >
+                  {" "}
+                  {props.username[0]}
+                </Avatar>
               }
               title={props.username}
               style={{ textAlign: "left", fontWeight: "bold" }}

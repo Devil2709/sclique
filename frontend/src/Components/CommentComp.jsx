@@ -63,12 +63,20 @@ const CommentComp = ({ comment, handleNewComment }) => {
     setCommentState(!isCommenting);
   };
 
+  let randomColor = Math.floor(Math.random() * 16777215).toString(16);
   if (comment.id === "main") {
+    console.log("#" + randomColor);
     return (
       <Box>
         <Card variant="outlined" sx={{ borderWidth: 2, borderRadius: "10px" }}>
           <CardHeader
-            avatar={<Avatar sx={{ height: 30, width: 30, bgcolor: "cyan" }} />}
+            avatar={
+              <Avatar
+                sx={{ height: 30, width: 30, bgcolor: "#" + randomColor }}
+              >
+                {comment.username[0]}
+              </Avatar>
+            }
             title={comment.username}
             style={{ textAlign: "left", fontWeight: "bold" }}
           />
@@ -122,7 +130,7 @@ const CommentComp = ({ comment, handleNewComment }) => {
                 flexDirection: "column",
                 justifyContent: "flex-start",
                 alignContent: "flex-start",
-                pl: 1,
+                px: 2,
               }}
             >
               <TextField
@@ -193,7 +201,18 @@ const CommentComp = ({ comment, handleNewComment }) => {
       >
         <CardHeader
           sx={{ py: 0, px: 0, mx: 0 }}
-          avatar={<Avatar sx={{ height: 30, width: 30, mx: 0.2 }} />}
+          avatar={
+            <Avatar
+              sx={{
+                height: 30,
+                width: 30,
+                mx: 0.2,
+                bgcolor: "#" + randomColor,
+              }}
+            >
+              {comment.username[0]}
+            </Avatar>
+          }
           title={comment.username}
           style={{ textAlign: "left" }}
         />
