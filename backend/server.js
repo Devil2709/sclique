@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const userRoutes = require("./routes/userRoutes");
+const postRoutes = require("./routes/postRoutes");
 
 const app = express();
 
@@ -20,7 +21,11 @@ app.use(function (req, res, next) {
   // Request headers you wish to allow
   res.setHeader(
     "Access-Control-Allow-Headers",
-    "X-Requested-With,content-type"
+    "Authorization, Content-Type",
+    "X-Requested-With,content-type",
+    "Content-Type",
+    "Access-Control-Allow-Headers",
+    "Access-Control-Allow-Methods"
   );
 
   // Set to true if you need the website to include cookies in the requests sent
@@ -30,6 +35,8 @@ app.use(function (req, res, next) {
   // Pass to next layer of middleware
   next();
 });
+
+app.use("/api/posts", postRoutes);
 
 app.use("/api/user", userRoutes);
 
