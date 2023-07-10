@@ -1,16 +1,11 @@
-import { AssignmentIndOutlined } from "@mui/icons-material";
 import {
-  Avatar,
   Box,
   Button,
   Card,
-  CardActionArea,
   CardContent,
-  CardHeader,
   CardMedia,
   Container,
   createTheme,
-  Divider,
   ThemeProvider,
   Typography,
 } from "@mui/material";

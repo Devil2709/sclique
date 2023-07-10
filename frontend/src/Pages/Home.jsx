@@ -31,21 +31,6 @@ import { useAuthContext } from "../hooks/useAuthContext";
 import { usePostsContext } from "../hooks/usePostsContext";
 
 const Home = (props) => {
-  const DiscussionAr = [
-    {
-      username: "Abhaumik",
-      title: "Hello",
-      content: "Content",
-      image: null,
-    },
-    {
-      username: "ninjamayank",
-      title: "Hello2",
-      content: "Content",
-      image: Background,
-    },
-  ];
-
   const topChartAr = [
     { username: "Abhaumik", bitcnt: 100 },
     { username: "Abhaumik", bitcnt: 100 },
