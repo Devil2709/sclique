@@ -15,10 +15,11 @@ import {
   TableCell,
   TableHead,
   TableRow,
+  TextField,
   ThemeProvider,
   Typography,
 } from "@mui/material";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../Styles/Home.css";
 import DiscussionCard from "../Components/DiscussionCard";
 // import { AspectRatio, Box, Button, Stack, Typography } from "@mui/joy";
@@ -27,6 +28,7 @@ import Background from "../Images/backgrnd.png";
 // import { Avatar } from "@mui/material";
 import Logo from "../Images/ScliqueLogo.png";
 import { useAuthContext } from "../hooks/useAuthContext";
+import { usePostsContext } from "../hooks/usePostsContext";
 
 const Home = (props) => {
   const DiscussionAr = [
@@ -67,118 +69,81 @@ const Home = (props) => {
     },
   });
 
+  const { posts, dispatch: postDispatch } = usePostsContext();
   const { user } = useAuthContext();
 
+  const [isPosting, setIsPosting] = useState(false);
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+  const [image, setImage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      const response = await fetch("http://localhost:4000/api/posts", {});
+
+      const json = await response.json();
+
+      if (response.ok) {
+        postDispatch({ type: "SET", payload: json });
+      }
+    };
+
+    fetchPosts();
+  }, [postDispatch, user]);
+
+  const handleIsPosting = () => {
+    console.log("posting");
+    setIsPosting(user && !isPosting);
+  };
+
+  const handlePosting = async (event) => {
+    event.preventDefault();
+    console.log("here");
+    const post = {
+      title: title,
+      content: content,
+      image: image,
+      username: user.username,
+      voteCnt: 0,
+    };
+
+    const response = await fetch(
+      "http://localhost:4000/api/posts/create_post",
+      {
+        method: "POST",
+        body: JSON.stringify(post),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `User ${user.token}`,
+        },
+      }
+    );
+
+    const json = await response.json();
+    console.log(json);
+    if (!response.ok) {
+      setError(json.error);
+      setIsLoading(false);
+      console.log(error);
+    }
+
+    if (response.ok) {
+      setTitle("");
+      setIsLoading(false);
+      setIsPosting(false);
+      setContent("");
+      setImage(null);
+      setError(null);
+      postDispatch({ type: "CREATE", payload: json });
+      console.log(posts);
+    }
+  };
+
+  console.log(posts);
+
   return (
-    // <div>
-    //   <div
-    //     style={{
-    //       height: "100vh",
-    //       display: "flex",
-    //       justifyContent: "space-around",
-    //       background: "black",
-    //       padding: 10,
-    //     }}
-    //   >
-    //     <Box
-    //       className="home-back"
-    //       sx={{
-    //         display: "flex",
-    //         flexDirection: "column",
-    //         justifyContent: "center",
-    //       }}
-    //     >
-    //       <Box className="home-header">
-    //         <Typography level="display1" textColor="#0277bd" textAlign="left">
-    //           Grow
-    //         </Typography>
-    //         <Typography
-    //           level="display1"
-    //           textColor="common.white"
-    //           textAlign="left"
-    //         >
-    //           without
-    //         </Typography>
-    //         <Typography
-    //           level="display1"
-    //           textColor="common.white"
-    //           textAlign="left"
-    //         >
-    //           bounderies
-    //         </Typography>
-    //         <Typography level="h4" textColor="common.white" textAlign="left">
-    //           Join the largest and smartest student <br /> community in the
-    //           world and grow together.
-    //         </Typography>
-    //       </Box>
-    //       <Box
-    //         className="button-div"
-    //         sx={{ marginTop: 8, display: "flex", justifyContent: "flex-start" }}
-    //       >
-    //         <Button
-    //           component={Link}
-    //           to="/login"
-    //           color="primary"
-    //           sx={{
-    //             width: "120px",
-    //             height: "60px",
-    //             marginRight: "10px",
-    //             fontSize: 20,
-    //             bgcolor: "#0277bd",
-    //           }}
-    //         >
-    //           Login
-    //         </Button>
-    //         <Button
-    //           sx={{
-    //             width: "120px",
-    //             height: "60px",
-    //             marginLeft: "10px",
-    //             fontSize: 20,
-    //             bgcolor: "#0277bd",
-    //           }}
-    //           color="primary"
-    //           component={Link}
-    //           to="/signup"
-    //         >
-    //           Sign Up
-    //         </Button>
-    //       </Box>
-    //     </Box>
-    //     <Box alignSelf="center">
-    //       <Stack
-    //         flexDirection="row"
-    //         justifyContent="center"
-    //         gap={2}
-    //         alignContent="center"
-    //         marginBottom={4}
-    //       >
-    //         <Avatar
-    //           src={Logo}
-    //           variant="circular"
-    //           sx={{
-    //             bgcolor: "white",
-    //             height: 30,
-    //             width: 30,
-    //             alignSelf: "center",
-    //             padding: 1,
-    //           }}
-    //         />
-    //         <Typography level="h1" textColor="common.white">
-    //           Sclique
-    //         </Typography>
-    //       </Stack>
-    //       <AspectRatio
-    //         variant="plain"
-    //         ratio="4/3"
-    //         sx={{ borderRadius: "md", width: 600, alignSelf: "center" }}
-    //       >
-    //         <img src={Background} alt="back" />
-    //       </AspectRatio>
-    //     </Box>
-    //   </div>
-    //   <DiscussionCard username="Abhaumik" title="Hello" content="Content" />
-    // </div>
     <ThemeProvider theme={darkTheme}>
       <Container
         style={{
@@ -189,20 +154,73 @@ const Home = (props) => {
           padding: 20,
         }}
       >
-        <Grid
-          container
-          direction="row"
-          spacing={3}
-          alignItems="stretch"
-          justifyContent="flex-start"
-          margin={1}
-        >
-          {DiscussionAr.map((disItem, index) => (
-            <Grid item xs={12} key={index}>
-              <DiscussionCard {...disItem}></DiscussionCard>
-            </Grid>
-          ))}
-        </Grid>
+        <Box width="100%" padding="10px" sx={{ pt: 4 }}>
+          <Grid
+            container
+            direction="row"
+            spacing={3}
+            alignItems="flex-start"
+            justifyContent="flex-start"
+          >
+            {isPosting && (
+              <Grid item xs={12}>
+                <Card
+                  variant="outlined"
+                  component="form"
+                  onSubmit={handlePosting}
+                  sx={{
+                    width: "100%",
+                    borderWidth: 2,
+                    borderRadius: "10px",
+                  }}
+                >
+                  <CardContent>
+                    <Grid container spacing={2}>
+                      <Grid item xs={12}>
+                        <TextField
+                          required
+                          fullWidth
+                          id="title"
+                          label="Title"
+                          name="title"
+                          onChange={(e) => setTitle(e.target.value)}
+                          value={title}
+                        />
+                      </Grid>
+                      <Grid item xs={12}>
+                        <TextField
+                          required
+                          fullWidth
+                          multiline
+                          name="content"
+                          label="content"
+                          id="content"
+                          onChange={(e) => setContent(e.target.value)}
+                          value={content}
+                        />
+                      </Grid>
+                    </Grid>
+                    <Button
+                      type="submit"
+                      fullWidth
+                      variant="contained"
+                      sx={{ mt: 3, mb: 2 }}
+                      disabled={isLoading}
+                    >
+                      Post
+                    </Button>
+                    {error && <div>{error}</div>}
+                  </CardContent>
+                </Card>
+              </Grid>
+            )}
+            {posts?.map((disItem, index) => (
+              <Grid item xs={12} key={index}>
+                <DiscussionCard {...disItem}></DiscussionCard>
+              </Grid>
+            ))}
+          </Grid>
+        </Box>
         <Box margin={1} marginTop={4}>
           <Card
             variant="outlined"
@@ -283,6 +301,7 @@ const Home = (props) => {
                     height: "40px",
                     borderRadius: "20px",
                   }}
+                  onClick={handleIsPosting}
                 >
                   Create Post
                 </Button>
