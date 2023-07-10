@@ -159,6 +159,22 @@ const Home = (props) => {
                     borderRadius: "10px",
                   }}
                 >
+                  <CardHeader
+                    avatar={
+                      <Avatar
+                        sx={{
+                          height: 30,
+                          width: 30,
+                          padding: 0.5,
+                          bgcolor: "white",
+                        }}
+                      >
+                        {user.username[0]}
+                      </Avatar>
+                    }
+                    title={user.username}
+                    style={{ textAlign: "left" }}
+                  />
                   <CardContent>
                     <Grid container spacing={2}>
                       <Grid item xs={12}>
@@ -178,8 +194,9 @@ const Home = (props) => {
                           fullWidth
                           multiline
                           name="content"
-                          label="content"
+                          label="Content"
                           id="content"
+                          rows={3}
                           onChange={(e) => setContent(e.target.value)}
                           value={content}
                         />
