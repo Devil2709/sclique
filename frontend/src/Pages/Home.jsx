@@ -126,8 +126,6 @@ const Home = (props) => {
     }
   };
 
-  console.log(posts);
-
   return (
     <ThemeProvider theme={darkTheme}>
       <Container
@@ -339,9 +337,9 @@ const Home = (props) => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {topChartAr.map((row) => (
+                {topChartAr.map((row, ind) => (
                   <TableRow
-                    key={row.name}
+                    key={ind}
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                   >
                     <TableCell align="center" component="th" scope="row">

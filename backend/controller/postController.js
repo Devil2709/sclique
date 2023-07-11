@@ -10,6 +10,15 @@ const getPosts = async (req, res) => {
   }
 };
 
+const getPost = async (req, res) => {
+  try {
+    const post = await Post.findOne({ _id: req.id });
+    res.status(200).json(post);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
 const createPost = async (req, res) => {
   const { title, content, image, username } = req.body;
   try {
@@ -22,4 +31,4 @@ const createPost = async (req, res) => {
   }
 };
 
-module.exports = { getPosts, createPost };
+module.exports = { getPosts, getPost, createPost };

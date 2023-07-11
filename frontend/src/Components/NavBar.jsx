@@ -47,7 +47,6 @@ function useRouteMatch(patterns) {
   for (let i = 0; i < patterns.length; i += 1) {
     const pattern = patterns[i];
     const possibleMatch = matchPath(pattern, pathname);
-    console.log(possibleMatch);
     if (possibleMatch !== null) {
       return possibleMatch;
     }
@@ -57,7 +56,7 @@ function useRouteMatch(patterns) {
 export default function NavBar() {
   // const [value, setValue] = React.useState("/home");
 
-  console.log(useLocation().pathname);
+  // console.log(useLocation().pathname);
   // const handleChange = (event, newValue) => {
   //   setValue(newValue);
   // };
@@ -69,7 +68,7 @@ export default function NavBar() {
     "/store",
   ]);
   const currentTab = routeMatch?.pattern?.path;
-  console.log(currentTab);
+  // console.log(currentTab);
 
   const [anchorEle, setAnchorEle] = React.useState(null);
   const open = Boolean(anchorEle);

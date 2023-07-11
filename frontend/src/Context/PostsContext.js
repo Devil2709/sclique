@@ -12,7 +12,10 @@ export const postsReducer = (state, action) => {
       return {
         posts: [action.payload, ...state.posts],
       };
-
+    case "SET_CURRENT":
+      return {
+        currentPost: action.payload,
+      };
     default:
       return state;
   }
@@ -21,6 +24,7 @@ export const postsReducer = (state, action) => {
 export const PostsContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(postsReducer, {
     posts: null,
+    currentPost: null,
   });
 
   return (

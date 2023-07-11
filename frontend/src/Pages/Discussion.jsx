@@ -9,9 +9,10 @@ import {
   ThemeProvider,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CommentComp from "../Components/CommentComp";
 import { useNode } from "../hooks/useNode";
+import { usePostsContext } from "../hooks/usePostsContext";
 import Background from "../Images/backgrnd.png";
 import CodingImg from "../Images/CodingImg.jpeg";
 import HoodieImg from "../Images/HoodieImg.jpeg";
@@ -81,133 +82,143 @@ const localCommmentAr = [
   },
 ];
 
-const Discussion = (props) => {
-  const [rootComment, setRootComment] = useState({
-    id: "main",
-    username: "Abhaumik",
-    title: "Title1",
-    content: "Hello",
-    image: Background,
-    commentAr: localCommmentAr,
-  });
-  const { addComment } = useNode();
+const Discussion = () => {
+  const { currentPost } = usePostsContext();
+  const { addComment, makeTree } = useNode();
+  const [rootComment, setRootComment] = useState(null);
 
-  const handleNewComment = (commentId, newComment) => {
-    setRootComment(addComment(commentId, rootComment, newComment));
+  console.log(currentPost);
+
+  useEffect(() => {
+    (async () => {
+      console.log(currentPost);
+      setRootComment(await makeTree(currentPost));
+      console.log(rootComment);
+    })();
+  }, []);
+
+  console.log(rootComment);
+
+  const handleNewComment = async (commentId, newComment) => {
+    console.log(commentId, rootComment._id);
+    const tmp = await addComment(commentId, rootComment, newComment);
+    setRootComment(tmp);
   };
 
   return (
-    <ThemeProvider theme={darkTheme}>
-      <Container
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "space-between",
-          alignContent: "flex-start",
-          padding: 20,
-        }}
-      >
-        <Box sx={{ width: "100%", px: 2 }}>
-          <CommentComp
-            comment={rootComment}
-            handleNewComment={handleNewComment}
-          />
-        </Box>
-        <Box sx={{ width: 500, mx: 2 }}>
-          <Card
-            variant="outlined"
-            sx={{
-              minWidth: 300,
-              borderWidth: 2,
-              borderRadius: "10px",
-              mb: 2,
-            }}
-          >
-            <CardMedia
-              component="img"
-              height={130}
-              src={CodingImg}
-              sx={{ objectFit: "cover" }}
+    rootComment && (
+      <ThemeProvider theme={darkTheme}>
+        <Container
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignContent: "flex-start",
+            padding: 20,
+          }}
+        >
+          <Box sx={{ width: "100%", px: 2 }}>
+            <CommentComp
+              comment={rootComment}
+              handleNewComment={handleNewComment}
             />
-            <CardContent>
-              <Typography variant="h5" textAlign="left">
-                <span style={{ color: "#0277bd", fontWeight: "bold" }}>
-                  Grow
-                </span>
-                <br /> With Challenges
-              </Typography>
-            </CardContent>
-            <Container
+          </Box>
+          <Box sx={{ width: 500, mx: 2 }}>
+            <Card
+              variant="outlined"
               sx={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-between",
-                alignItems: "stretch",
-                padding: 0,
+                minWidth: 300,
+                borderWidth: 2,
+                borderRadius: "10px",
+                mb: 2,
               }}
             >
-              <Button
-                variant="contained"
-                color="primary"
+              <CardMedia
+                component="img"
+                height={130}
+                src={CodingImg}
+                sx={{ objectFit: "cover" }}
+              />
+              <CardContent>
+                <Typography variant="h5" textAlign="left">
+                  <span style={{ color: "#0277bd", fontWeight: "bold" }}>
+                    Grow
+                  </span>
+                  <br /> With Challenges
+                </Typography>
+              </CardContent>
+              <Container
                 sx={{
-                  mb: 2,
-                  height: "40px",
-                  borderRadius: "20px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  alignItems: "stretch",
+                  padding: 0,
                 }}
               >
-                Register
-              </Button>
-            </Container>
-          </Card>
-          <Card
-            variant="outlined"
-            sx={{
-              minWidth: 300,
-              borderWidth: 2,
-              borderRadius: "10px",
-              mb: 2,
-            }}
-          >
-            <CardMedia
-              component="img"
-              height={130}
-              src={HoodieImg}
-              sx={{ objectFit: "cover" }}
-            />
-            <CardContent>
-              <Typography variant="h5" textAlign="left">
-                <span style={{ color: "#0277bd", fontWeight: "bold" }}>
-                  Win
-                </span>
-                <br /> Merchandise
-              </Typography>
-            </CardContent>
-            <Container
+                <Button
+                  variant="contained"
+                  color="primary"
+                  sx={{
+                    mb: 2,
+                    height: "40px",
+                    borderRadius: "20px",
+                  }}
+                >
+                  Register
+                </Button>
+              </Container>
+            </Card>
+            <Card
+              variant="outlined"
               sx={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-between",
-                alignItems: "stretch",
-                padding: 0,
+                minWidth: 300,
+                borderWidth: 2,
+                borderRadius: "10px",
+                mb: 2,
               }}
             >
-              <Button
-                variant="contained"
-                color="primary"
-                href="/store"
+              <CardMedia
+                component="img"
+                height={130}
+                src={HoodieImg}
+                sx={{ objectFit: "cover" }}
+              />
+              <CardContent>
+                <Typography variant="h5" textAlign="left">
+                  <span style={{ color: "#0277bd", fontWeight: "bold" }}>
+                    Win
+                  </span>
+                  <br /> Merchandise
+                </Typography>
+              </CardContent>
+              <Container
                 sx={{
-                  mb: 2,
-                  height: "40px",
-                  borderRadius: "20px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  alignItems: "stretch",
+                  padding: 0,
                 }}
               >
-                Visit Store
-              </Button>
-            </Container>
-          </Card>
-        </Box>
-      </Container>
-    </ThemeProvider>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  href="/store"
+                  sx={{
+                    mb: 2,
+                    height: "40px",
+                    borderRadius: "20px",
+                  }}
+                >
+                  Visit Store
+                </Button>
+              </Container>
+            </Card>
+          </Box>
+        </Container>
+      </ThemeProvider>
+    )
   );
 };
 

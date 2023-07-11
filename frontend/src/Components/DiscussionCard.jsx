@@ -20,6 +20,8 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
+import { usePostsContext } from "../hooks/usePostsContext";
+import { useNavigate } from "react-router-dom";
 
 const darkTheme = createTheme({
   palette: {
@@ -29,6 +31,14 @@ const darkTheme = createTheme({
 
 const DiscussionCard = (props) => {
   let randomColor = Math.floor(Math.random() * 16777215).toString(16);
+  const { dispatch: postDispatch } = usePostsContext();
+  const navigate = useNavigate();
+
+  const handleOpenPost = () => {
+    postDispatch({ type: "SET_CURRENT", payload: props });
+    navigate("/discuss");
+  };
+
   return (
     <ThemeProvider theme={darkTheme}>
       <div>
@@ -49,7 +59,6 @@ const DiscussionCard = (props) => {
                 <Avatar
                   sx={{ height: 30, width: 30, bgcolor: "#" + randomColor }}
                 >
-                  {" "}
                   {props.username[0]}
                 </Avatar>
               }
@@ -79,30 +88,30 @@ const DiscussionCard = (props) => {
                 style={{ borderRadius: "30px" }}
               />
             )}
-
-            <CardActions sx={{ paddingLeft: 2 }}>
-              <Checkbox
-                aria-label="LikeCheck"
-                id={`like_check_${props.id}`}
-                icon={<ThumbUpOutlined />}
-                checkedIcon={<ThumbUpRounded />}
-                onChange={(event) => {
-                  event.stopPropagation();
-                  console.log("check changed");
-                }}
-              />
-              <Checkbox
-                aria-label="LikeCheck"
-                id={`like_check_${props.id}`}
-                icon={<ThumbDownOutlined />}
-                checkedIcon={<ThumbDownRounded />}
-                // onChange={}
-              />
-              <IconButton sx={{ mx: 1 }} href="discuss">
-                <CommentOutlined color="action" />
-              </IconButton>
-            </CardActions>
           </CardActionArea>
+
+          <CardActions sx={{ paddingLeft: 2 }}>
+            <Checkbox
+              aria-label="LikeCheck"
+              id={`like_check_${props.id}`}
+              icon={<ThumbUpOutlined />}
+              checkedIcon={<ThumbUpRounded />}
+              onChange={(event) => {
+                event.stopPropagation();
+                console.log("check changed");
+              }}
+            />
+            <Checkbox
+              aria-label="LikeCheck"
+              id={`like_check_${props.id}`}
+              icon={<ThumbDownOutlined />}
+              checkedIcon={<ThumbDownRounded />}
+              // onChange={}
+            />
+            <IconButton sx={{ mx: 1 }} onClick={handleOpenPost}>
+              <CommentOutlined color="action" />
+            </IconButton>
+          </CardActions>
         </Card>
       </div>
     </ThemeProvider>

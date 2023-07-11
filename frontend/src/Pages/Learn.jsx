@@ -113,7 +113,7 @@ CourseAr.sort(function (a, b) {
   return b.likeCount - a.likeCount;
 });
 
-console.log(CourseAr);
+// console.log(CourseAr);
 
 let initialFilter = new Set(["Coursera", "Udacity", "Udemy"]);
 

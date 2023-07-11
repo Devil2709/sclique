@@ -3,6 +3,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const userRoutes = require("./routes/userRoutes");
 const postRoutes = require("./routes/postRoutes");
+const commentRoutes = require("./routes/commentRoutes");
 
 const app = express();
 
@@ -39,6 +40,8 @@ app.use(function (req, res, next) {
 app.use("/api/posts", postRoutes);
 
 app.use("/api/user", userRoutes);
+
+app.use("/api/comment", commentRoutes);
 
 mongoose.connect(process.env.MONGO_URI).then(() => {
   app.listen(process.env.PORT, () => {
