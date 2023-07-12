@@ -24,6 +24,10 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
+  avatarColor: {
+    type: String,
+    required: true,
+  },
 });
 
 userSchema.statics.signup = async function (
@@ -31,7 +35,8 @@ userSchema.statics.signup = async function (
   password,
   firstName,
   lastName,
-  username
+  username,
+  avatarColor
 ) {
   if (!email || !password || !firstName || !username) {
     console.log(email, password, firstName, usename);
@@ -55,6 +60,7 @@ userSchema.statics.signup = async function (
     firstName,
     lastName,
     username,
+    avatarColor,
   });
   console.log(user);
   return user;

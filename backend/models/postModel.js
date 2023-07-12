@@ -31,11 +31,21 @@ const postSchema = new Schema(
       type: [String],
       required: true,
     },
+    avatarColor: {
+      type: String,
+      required: true,
+    },
   },
   { timestamps: true }
 );
 
-postSchema.statics.post = async function (title, content, image, username) {
+postSchema.statics.post = async function (
+  title,
+  content,
+  image,
+  username,
+  avatarColor
+) {
   if (!title || !username) {
     throw Error("Enter all fields");
   }
@@ -47,6 +57,7 @@ postSchema.statics.post = async function (title, content, image, username) {
     image,
     voteCnt: 0,
     type: "main",
+    avatarColor,
   });
   console.log(post);
   return post;

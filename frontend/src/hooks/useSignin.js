@@ -31,7 +31,7 @@ export const useSignin = () => {
       localStorage.setItem("user", JSON.stringify(json));
       setIsLoading(false);
       dispatch({ type: "LOGIN", payload: json });
-      setLink("/learn");
+      setLink("/home");
     }
   };
   return { signin, isLoading, error, link };

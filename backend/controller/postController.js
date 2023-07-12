@@ -21,9 +21,9 @@ const getPost = async (req, res) => {
 };
 
 const createPost = async (req, res) => {
-  const { title, content, image, username } = req.body;
+  const { title, content, image, username, avatarColor } = req.body;
   try {
-    const post = await Post.post(title, content, image, username);
+    const post = await Post.post(title, content, image, username, avatarColor);
     res.status(200).json(post);
     console.log("done");
   } catch (error) {

@@ -70,51 +70,20 @@ const CommentComp = ({ comment, handleNewComment }) => {
       voteCnt: 0,
       parentId: comment._id,
       parentType: comment.type,
+      avatarColor: JSON.parse(localStorage.getItem("user")).avatarColor,
       commentAr: [],
     };
 
     // console.log(newComment);
     // console.log(comment);
-    setCommentState(!isCommenting);
     setIsLoading(true);
     await handleNewComment(comment._id, newComment);
     setIsLoading(false);
+    setCommentState(!isCommenting);
   };
 
   if (!comment) {
     return null;
-  }
-
-  if (isLoading) {
-    console.log(comment.type);
-    return (
-      <ThemeProvider theme={darkTheme}>
-        {comment.type === "comment" && (
-          <Skeleton
-            variant="rectangular"
-            width="100%"
-            height={200}
-            sx={{ borderRadius: 2 }}
-          />
-        )}
-        {comment.type === "main" && (
-          <Container>
-            <Skeleton
-              variant="rectangular"
-              width="100%"
-              height={200}
-              sx={{ borderRadius: 2 }}
-            />
-            <Skeleton
-              variant="rectangular"
-              width="100%"
-              height={500}
-              sx={{ borderRadius: 2, mt: 3 }}
-            />
-          </Container>
-        )}
-      </ThemeProvider>
-    );
   }
 
   // console.log(comment);
@@ -129,7 +98,11 @@ const CommentComp = ({ comment, handleNewComment }) => {
             <CardHeader
               avatar={
                 <Avatar
-                  sx={{ height: 30, width: 30, bgcolor: "#" + randomColor }}
+                  sx={{
+                    height: 30,
+                    width: 30,
+                    bgcolor: comment.avatarColor,
+                  }}
                 >
                   {comment.username[0]}
                 </Avatar>
@@ -202,6 +175,7 @@ const CommentComp = ({ comment, handleNewComment }) => {
                 <Button
                   variant="contained"
                   color="primary"
+                  disabled={isLoading}
                   sx={{
                     mb: 2,
                     width: "80px",
@@ -215,7 +189,7 @@ const CommentComp = ({ comment, handleNewComment }) => {
               </Paper>
             )}
           </Card>
-          {
+          {comment.commentAr.length > 0 && (
             <Card
               variant="outlined"
               sx={{
@@ -240,7 +214,7 @@ const CommentComp = ({ comment, handleNewComment }) => {
                 </Box>
               </CardContent>
             </Card>
-          }
+          )}
         </Box>
       )}
 
@@ -264,7 +238,7 @@ const CommentComp = ({ comment, handleNewComment }) => {
                   height: 30,
                   width: 30,
                   mx: 0.2,
-                  bgcolor: "#" + randomColor,
+                  bgcolor: comment.avatarColor,
                 }}
               >
                 {comment.username[0]}

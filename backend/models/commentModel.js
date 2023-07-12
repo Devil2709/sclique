@@ -31,6 +31,10 @@ const commentSchema = new Schema(
       type: String,
       required: true,
     },
+    avatarColor: {
+      type: String,
+      required: true,
+    },
   },
   { timestamps: true }
 );
@@ -39,7 +43,8 @@ commentSchema.statics.post = async function (
   text,
   username,
   parentId,
-  parentType
+  parentType,
+  avatarColor
 ) {
   if (!text) {
     throw Error("Enter text");
@@ -65,6 +70,7 @@ commentSchema.statics.post = async function (
     parentId,
     parentType,
     commentAr: [],
+    avatarColor,
   });
   console.log(comment);
   return comment;

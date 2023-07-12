@@ -30,7 +30,6 @@ const darkTheme = createTheme({
 });
 
 const DiscussionCard = (props) => {
-  let randomColor = Math.floor(Math.random() * 16777215).toString(16);
   const { dispatch: postDispatch } = usePostsContext();
   const navigate = useNavigate();
 
@@ -57,7 +56,11 @@ const DiscussionCard = (props) => {
             <CardHeader
               avatar={
                 <Avatar
-                  sx={{ height: 30, width: 30, bgcolor: "#" + randomColor }}
+                  sx={{
+                    height: 30,
+                    width: 30,
+                    bgcolor: props.avatarColor,
+                  }}
                 >
                   {props.username[0]}
                 </Avatar>

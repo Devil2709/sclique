@@ -11,7 +11,8 @@ const loginUser = async (req, res) => {
     const user = await User.login(email, password);
     const token = createToken(user._id);
     const username = user.username;
-    res.status(200).json({ email, username, token });
+    const avatarColor = user.avatarColor;
+    res.status(200).json({ email, username, token, avatarColor });
     console.log("done");
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -19,17 +20,19 @@ const loginUser = async (req, res) => {
 };
 
 const signupUser = async (req, res) => {
-  const { email, password, firstName, lastName, username } = req.body;
+  const { email, password, firstName, lastName, username, avatarColor } =
+    req.body;
   try {
     const user = await User.signup(
       email,
       password,
       firstName,
       lastName,
-      username
+      username,
+      avatarColor
     );
     const token = createToken(user._id);
-    res.status(200).json({ email, username, token });
+    res.status(200).json({ email, username, token, avatarColor });
     console.log("done");
   } catch (error) {
     res.status(400).json({ error: error.message });

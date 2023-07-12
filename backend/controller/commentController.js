@@ -13,9 +13,15 @@ const getComment = async (req, res) => {
 };
 
 const createComment = async (req, res) => {
-  const { text, username, parentId, parentType } = req.body;
+  const { text, username, parentId, parentType, avatarColor } = req.body;
   try {
-    const comment = await Comment.post(text, username, parentId, parentType);
+    const comment = await Comment.post(
+      text,
+      username,
+      parentId,
+      parentType,
+      avatarColor
+    );
     let parent;
     if (parentType === "main") {
       parent = await Post.findOne({ _id: parentId });

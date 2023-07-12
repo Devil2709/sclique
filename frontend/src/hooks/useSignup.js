@@ -11,6 +11,7 @@ export const useSignup = () => {
     setIsLoading(true);
     setError(null);
     setLink(null);
+    let randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
     const response = await fetch("http://localhost:4000/api/user/signup", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -20,6 +21,7 @@ export const useSignup = () => {
         firstName,
         lastName,
         username,
+        avatarColor: randomColor,
       }),
     });
     const json = await response.json();
@@ -31,7 +33,7 @@ export const useSignup = () => {
       localStorage.setItem("user", JSON.stringify(json));
       setIsLoading(false);
       dispatch({ type: "LOGIN", payload: json });
-      setLink("/learn");
+      setLink("/home");
       console.log("OK");
     }
   };

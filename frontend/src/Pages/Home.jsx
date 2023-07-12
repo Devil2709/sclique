@@ -91,6 +91,7 @@ const Home = (props) => {
       content: content,
       image: image,
       username: user.username,
+      avatarColor: user.avatarColor,
       voteCnt: 0,
     };
 
@@ -164,7 +165,7 @@ const Home = (props) => {
                           height: 30,
                           width: 30,
                           padding: 0.5,
-                          bgcolor: "white",
+                          bgcolor: user.avatarColor,
                         }}
                       >
                         {user.username[0]}
