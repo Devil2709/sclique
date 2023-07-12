@@ -16,6 +16,7 @@ import {
   Checkbox,
   createTheme,
   IconButton,
+  Stack,
   ThemeProvider,
   Typography,
 } from "@mui/material";
@@ -48,11 +49,7 @@ const DiscussionCard = (props) => {
             borderRadius: "10px",
           }}
         >
-          <CardActionArea
-            onClick={() => {
-              console.log("card action");
-            }}
-          >
+          <CardActionArea onClick={handleOpenPost}>
             <CardHeader
               avatar={
                 <Avatar
@@ -93,7 +90,7 @@ const DiscussionCard = (props) => {
             )}
           </CardActionArea>
 
-          <CardActions sx={{ paddingLeft: 2 }}>
+          <Stack direction="row" sx={{ padding: 1, alignItems: "center" }}>
             <Checkbox
               aria-label="LikeCheck"
               id={`like_check_${props.id}`}
@@ -114,7 +111,10 @@ const DiscussionCard = (props) => {
             <IconButton sx={{ mx: 1 }} onClick={handleOpenPost}>
               <CommentOutlined color="action" />
             </IconButton>
-          </CardActions>
+            <Typography color="InactiveCaptionText" variant="h6">
+              {props.commentAr.length}
+            </Typography>
+          </Stack>
         </Card>
       </div>
     </ThemeProvider>
