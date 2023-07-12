@@ -57,7 +57,11 @@ const CourseCards = (props) => {
           },
         }}
       >
-        <CardActionArea href={props.link} target="_blank">
+        <CardActionArea
+          href={props.link}
+          target="_blank"
+          sx={{ borderBottomRightRadius: 0, borderBottomLeftRadius: 0 }}
+        >
           <CardMedia
             component="img"
             height="200"

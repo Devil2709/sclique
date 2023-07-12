@@ -49,7 +49,10 @@ const DiscussionCard = (props) => {
             borderRadius: "10px",
           }}
         >
-          <CardActionArea onClick={handleOpenPost}>
+          <CardActionArea
+            onClick={handleOpenPost}
+            sx={{ borderBottomRightRadius: 0, borderBottomLeftRadius: 0 }}
+          >
             <CardHeader
               avatar={
                 <Avatar
