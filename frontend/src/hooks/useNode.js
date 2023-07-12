@@ -1,7 +1,6 @@
 export const useNode = () => {
   const makeTree = async (curNode) => {
     let childAr = [];
-    console.log(curNode);
     childAr = await Promise.all(
       curNode.commentAr.map(async (comment_id) => {
         const response = await fetch(
@@ -21,7 +20,7 @@ export const useNode = () => {
         }
       })
     );
-    console.log(childAr);
+    // console.log(childAr);
     return { ...curNode, commentAr: childAr };
   };
 
@@ -39,8 +38,40 @@ export const useNode = () => {
       if (!response.ok) {
         console.log("Error");
       } else {
-        commentNode.commentAr.unshift(newComment);
-        return commentNode;
+        console.log(newComment);
+        if (commentNode.type === "main") {
+          const response = await fetch(
+            "http://localhost:4000/api/posts/" + commentNode._id,
+            {
+              method: "GET",
+              headers: { "Content-Type": "application/json" },
+            }
+          );
+
+          const json = await response.json();
+
+          if (!response.ok) {
+            console.log("Error");
+          } else {
+            return await makeTree(json);
+          }
+        } else {
+          const response = await fetch(
+            "http://localhost:4000/api/comment/" + commentNode._id,
+            {
+              method: "GET",
+              headers: { "Content-Type": "application/json" },
+            }
+          );
+
+          const json = await response.json();
+
+          if (!response.ok) {
+            console.log("Error");
+          } else {
+            return await makeTree(json);
+          }
+        }
       }
     } else {
       let lastNode = [];

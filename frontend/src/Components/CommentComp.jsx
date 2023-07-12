@@ -15,16 +15,19 @@ import {
   CardHeader,
   CardMedia,
   Checkbox,
+  Container,
   createTheme,
   Divider,
   IconButton,
   Paper,
+  Skeleton,
   Stack,
   TextField,
   ThemeProvider,
   Typography,
 } from "@mui/material";
 import React, { useState } from "react";
+import { v1 as uuidv1 } from "uuid";
 
 const darkTheme = createTheme({
   palette: {
@@ -45,7 +48,8 @@ let randomColor = Math.floor(Math.random() * 16777215).toString(16);
 
 const CommentComp = ({ comment, handleNewComment }) => {
   const [isCommenting, setCommentState] = useState(false);
-  const [commentText, setCommentText] = useState(null);
+  const [commentText, setCommentText] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleCommenting = () => {
     setCommentState(!isCommenting && localStorage.getItem("user"));
@@ -53,6 +57,11 @@ const CommentComp = ({ comment, handleNewComment }) => {
 
   const handlePost = async () => {
     // console.log(JSON.parse(localStorage.getItem("user")));
+
+    if (!comment?._id) {
+      console.log("no comment id");
+      return;
+    }
 
     const newComment = {
       username: JSON.parse(localStorage.getItem("user")).username,
@@ -64,9 +73,49 @@ const CommentComp = ({ comment, handleNewComment }) => {
       commentAr: [],
     };
 
-    await handleNewComment(comment._id, newComment);
+    // console.log(newComment);
+    // console.log(comment);
     setCommentState(!isCommenting);
+    setIsLoading(true);
+    await handleNewComment(comment._id, newComment);
+    setIsLoading(false);
   };
+
+  if (!comment) {
+    return null;
+  }
+
+  if (isLoading) {
+    console.log(comment.type);
+    return (
+      <ThemeProvider theme={darkTheme}>
+        {comment.type === "comment" && (
+          <Skeleton
+            variant="rectangular"
+            width="100%"
+            height={200}
+            sx={{ borderRadius: 2 }}
+          />
+        )}
+        {comment.type === "main" && (
+          <Container>
+            <Skeleton
+              variant="rectangular"
+              width="100%"
+              height={200}
+              sx={{ borderRadius: 2 }}
+            />
+            <Skeleton
+              variant="rectangular"
+              width="100%"
+              height={500}
+              sx={{ borderRadius: 2, mt: 3 }}
+            />
+          </Container>
+        )}
+      </ThemeProvider>
+    );
+  }
 
   // console.log(comment);
   return (
@@ -82,7 +131,7 @@ const CommentComp = ({ comment, handleNewComment }) => {
                 <Avatar
                   sx={{ height: 30, width: 30, bgcolor: "#" + randomColor }}
                 >
-                  A
+                  {comment.username[0]}
                 </Avatar>
               }
               title={comment?.username}
@@ -130,7 +179,7 @@ const CommentComp = ({ comment, handleNewComment }) => {
                 <AddCommentRounded />
               </IconButton>
             </CardActions>
-            {isCommenting && (
+            {isCommenting && comment?._id && (
               <Paper
                 variant="oulined"
                 sx={{
@@ -218,7 +267,7 @@ const CommentComp = ({ comment, handleNewComment }) => {
                   bgcolor: "#" + randomColor,
                 }}
               >
-                A
+                {comment.username[0]}
               </Avatar>
             }
             title={comment.username}

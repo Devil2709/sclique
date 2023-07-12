@@ -1,5 +1,9 @@
 const express = require("express");
-const { getPosts, createPost } = require("../controller/postController");
+const {
+  getPosts,
+  getPost,
+  createPost,
+} = require("../controller/postController");
 const requireAuth = require("../middleware/requireAuth");
 
 const router = express.Router();
@@ -7,6 +11,8 @@ const router = express.Router();
 // router.use(requireAuth);
 
 router.get("/", getPosts);
+
+router.get("/:id", getPost);
 
 router.post("/create_post", createPost);
 

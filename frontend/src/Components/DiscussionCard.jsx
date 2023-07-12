@@ -36,7 +36,7 @@ const DiscussionCard = (props) => {
 
   const handleOpenPost = () => {
     postDispatch({ type: "SET_CURRENT", payload: props });
-    navigate("/discuss");
+    navigate("/discuss/" + props._id);
   };
 
   return (

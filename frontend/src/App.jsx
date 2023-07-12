@@ -71,7 +71,7 @@ function App() {
             }
           />
           <Route
-            path="discuss"
+            path="discuss/:id"
             element={
               <div>
                 <NavBar />

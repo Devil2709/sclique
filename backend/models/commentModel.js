@@ -41,8 +41,20 @@ commentSchema.statics.post = async function (
   parentId,
   parentType
 ) {
-  if (!text || !username || !parentId || !parentType) {
-    throw Error("Enter all fields");
+  if (!text) {
+    throw Error("Enter text");
+  }
+
+  if (!username) {
+    throw Error("Enter username");
+  }
+
+  if (!parentId) {
+    throw Error("Enter parentId");
+  }
+
+  if (!parentType) {
+    throw Error("Enter parent type");
   }
 
   const comment = await this.create({
