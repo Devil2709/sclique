@@ -9,7 +9,6 @@ import {
   Avatar,
   Card,
   CardActionArea,
-  CardActions,
   CardContent,
   CardHeader,
   CardMedia,
@@ -23,6 +22,7 @@ import {
 import React from "react";
 import { usePostsContext } from "../hooks/usePostsContext";
 import { useNavigate } from "react-router-dom";
+import moment from "moment";
 
 const darkTheme = createTheme({
   palette: {
@@ -66,7 +66,9 @@ const DiscussionCard = (props) => {
                 </Avatar>
               }
               title={props.username}
+              titleTypographyProps={{ variant: "body1", fontWeight: "bold" }}
               style={{ textAlign: "left", fontWeight: "bold" }}
+              subheader={moment(props.createdAt).fromNow()}
             />
             <CardContent
               sx={{

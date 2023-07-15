@@ -6,10 +6,12 @@ import {
   CardContent,
   CardHeader,
   CardMedia,
+  Collapse,
   Container,
   createTheme,
   Divider,
   Grid,
+  IconButton,
   Table,
   TableBody,
   TableCell,
@@ -29,6 +31,8 @@ import Background from "../Images/backgrnd.png";
 import Logo from "../Images/ScliqueLogo.png";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { usePostsContext } from "../hooks/usePostsContext";
+import { CloseRounded } from "@mui/icons-material";
+import { TransitionGroup } from "react-transition-group";
 
 const Home = (props) => {
   const topChartAr = [
@@ -138,88 +142,111 @@ const Home = (props) => {
           padding: 20,
         }}
       >
-        <Box width="100%" padding="10px" sx={{ pt: 4 }}>
+        <Box
+          width="100%"
+          padding="10px"
+          sx={{ pt: 4, transition: "ease 0.2s" }}
+        >
           <Grid
             container
             direction="row"
             spacing={3}
             alignItems="flex-start"
             justifyContent="flex-start"
+            sx={{ transition: "ease 1s" }}
           >
-            {isPosting && (
-              <Grid item xs={12}>
-                <Card
-                  variant="outlined"
-                  component="form"
-                  onSubmit={handlePosting}
-                  sx={{
-                    width: "100%",
-                    borderWidth: 2,
-                    borderRadius: "10px",
+            <TransitionGroup component={null}>
+              {isPosting && user && (
+                <Grid item component={Collapse} xs={12}>
+                  <Card
+                    variant="outlined"
+                    component="form"
+                    onSubmit={handlePosting}
+                    sx={{
+                      width: "100%",
+                      borderWidth: 2,
+                      borderRadius: "10px",
+                    }}
+                  >
+                    <CardHeader
+                      avatar={
+                        <Avatar
+                          sx={{
+                            height: 30,
+                            width: 30,
+                            padding: 0.5,
+                            bgcolor: user.avatarColor,
+                          }}
+                        >
+                          {user.username[0]}
+                        </Avatar>
+                      }
+                      title={user.username}
+                      action={
+                        <IconButton onClick={handleIsPosting}>
+                          <CloseRounded color="disabled" />
+                        </IconButton>
+                      }
+                      style={{ textAlign: "left" }}
+                    />
+                    <CardContent>
+                      <Grid container spacing={2}>
+                        <Grid item xs={12}>
+                          <TextField
+                            required
+                            fullWidth
+                            id="title"
+                            label="Title"
+                            name="title"
+                            onChange={(e) => setTitle(e.target.value)}
+                            value={title}
+                          />
+                        </Grid>
+                        <Grid item xs={12}>
+                          <TextField
+                            required
+                            fullWidth
+                            multiline
+                            name="content"
+                            label="Content"
+                            id="content"
+                            rows={3}
+                            onChange={(e) => setContent(e.target.value)}
+                            value={content}
+                          />
+                        </Grid>
+                      </Grid>
+                      <Button
+                        type="submit"
+                        fullWidth
+                        variant="contained"
+                        sx={{ mt: 3, mb: 2 }}
+                        disabled={isLoading}
+                      >
+                        Post
+                      </Button>
+                      {error && <div>{error}</div>}
+                    </CardContent>
+                  </Card>
+                </Grid>
+              )}
+              {posts?.map((disItem, index) => (
+                <Grid
+                  item
+                  xs={12}
+                  key={index}
+                  component={Collapse}
+                  style={{
+                    transition: darkTheme.transitions.create("all", {
+                      easing: darkTheme.transitions.easing.sharp,
+                      duration: darkTheme.transitions.duration.leavingScreen,
+                    }),
                   }}
                 >
-                  <CardHeader
-                    avatar={
-                      <Avatar
-                        sx={{
-                          height: 30,
-                          width: 30,
-                          padding: 0.5,
-                          bgcolor: user.avatarColor,
-                        }}
-                      >
-                        {user.username[0]}
-                      </Avatar>
-                    }
-                    title={user.username}
-                    style={{ textAlign: "left" }}
-                  />
-                  <CardContent>
-                    <Grid container spacing={2}>
-                      <Grid item xs={12}>
-                        <TextField
-                          required
-                          fullWidth
-                          id="title"
-                          label="Title"
-                          name="title"
-                          onChange={(e) => setTitle(e.target.value)}
-                          value={title}
-                        />
-                      </Grid>
-                      <Grid item xs={12}>
-                        <TextField
-                          required
-                          fullWidth
-                          multiline
-                          name="content"
-                          label="Content"
-                          id="content"
-                          rows={3}
-                          onChange={(e) => setContent(e.target.value)}
-                          value={content}
-                        />
-                      </Grid>
-                    </Grid>
-                    <Button
-                      type="submit"
-                      fullWidth
-                      variant="contained"
-                      sx={{ mt: 3, mb: 2 }}
-                      disabled={isLoading}
-                    >
-                      Post
-                    </Button>
-                    {error && <div>{error}</div>}
-                  </CardContent>
-                </Card>
-              </Grid>
-            )}
-            {posts?.map((disItem, index) => (
-              <Grid item xs={12} key={index}>
-                <DiscussionCard {...disItem}></DiscussionCard>
-              </Grid>
-            ))}
+                  <DiscussionCard {...disItem}></DiscussionCard>
+                </Grid>
+              ))}
+            </TransitionGroup>
           </Grid>
         </Box>
         <Box margin={1} marginTop={4}>

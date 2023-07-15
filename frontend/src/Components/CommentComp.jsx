@@ -15,19 +15,17 @@ import {
   CardHeader,
   CardMedia,
   Checkbox,
-  Container,
   createTheme,
   Divider,
   IconButton,
   Paper,
-  Skeleton,
   Stack,
   TextField,
   ThemeProvider,
   Typography,
 } from "@mui/material";
 import React, { useState } from "react";
-import { v1 as uuidv1 } from "uuid";
+import moment from "moment";
 
 const darkTheme = createTheme({
   palette: {
@@ -43,8 +41,6 @@ const darkTheme = createTheme({
     },
   },
 });
-
-let randomColor = Math.floor(Math.random() * 16777215).toString(16);
 
 const CommentComp = ({ comment, handleNewComment }) => {
   const [isCommenting, setCommentState] = useState(false);
@@ -109,6 +105,7 @@ const CommentComp = ({ comment, handleNewComment }) => {
               }
               title={comment?.username}
               style={{ textAlign: "left", fontWeight: "bold" }}
+              subheader={moment(comment.createdAt).fromNow()}
             />
             <CardContent
               sx={{
