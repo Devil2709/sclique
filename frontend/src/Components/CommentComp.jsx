@@ -103,7 +103,7 @@ const CommentComp = ({ comment, handleNewComment }) => {
                     bgcolor: comment.avatarColor,
                   }}
                 >
-                  {comment.username[0]}
+                  {comment.username[0].toUpperCase()}
                 </Avatar>
               }
               title={comment?.username}
@@ -157,6 +157,8 @@ const CommentComp = ({ comment, handleNewComment }) => {
             {isCommenting && comment?._id && (
               <Paper
                 variant="oulined"
+                component="form"
+                onSubmit={handlePost}
                 sx={{
                   display: "flex",
                   flexDirection: "column",
@@ -168,6 +170,7 @@ const CommentComp = ({ comment, handleNewComment }) => {
                 <TextField
                   fullWidth
                   multiline
+                  required
                   label="Comment"
                   sx={{ my: 2, transition: "0.2s" }}
                   onChange={(event) => {
@@ -175,6 +178,7 @@ const CommentComp = ({ comment, handleNewComment }) => {
                   }}
                 />
                 <Button
+                  type="submit"
                   variant="contained"
                   color="primary"
                   disabled={isLoading}
@@ -184,7 +188,6 @@ const CommentComp = ({ comment, handleNewComment }) => {
                     height: "30px",
                     borderRadius: "20px",
                   }}
-                  onClick={handlePost}
                 >
                   Post
                 </Button>
@@ -243,7 +246,7 @@ const CommentComp = ({ comment, handleNewComment }) => {
                   bgcolor: comment.avatarColor,
                 }}
               >
-                {comment.username[0]}
+                {comment.username[0].toUpperCase()}
               </Avatar>
             }
             title={comment.username}
@@ -299,6 +302,8 @@ const CommentComp = ({ comment, handleNewComment }) => {
               {isCommenting && (
                 <Paper
                   variant="oulined"
+                  component="form"
+                  onSubmit={handlePost}
                   sx={{
                     display: "flex",
                     flexDirection: "column",
@@ -310,6 +315,7 @@ const CommentComp = ({ comment, handleNewComment }) => {
                   <TextField
                     fullWidth
                     multiline
+                    required
                     label="Comment"
                     sx={{ my: 2, transition: "0.2s" }}
                     onChange={(event) => {
@@ -317,6 +323,7 @@ const CommentComp = ({ comment, handleNewComment }) => {
                     }}
                   />
                   <Button
+                    type="submit"
                     variant="contained"
                     color="primary"
                     sx={{
@@ -325,7 +332,6 @@ const CommentComp = ({ comment, handleNewComment }) => {
                       height: "30px",
                       borderRadius: "20px",
                     }}
-                    onClick={handlePost}
                   >
                     Post
                   </Button>

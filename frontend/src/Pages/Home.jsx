@@ -179,7 +179,7 @@ const Home = (props) => {
                             bgcolor: user.avatarColor,
                           }}
                         >
-                          {user.username[0]}
+                          {user.username[0].toUpperCase()}
                         </Avatar>
                       }
                       title={user.username}

@@ -45,10 +45,7 @@ const Discussion = () => {
   useEffect(() => {
     (async () => {
       // console.log(currentPost);
-      const response = await fetch(
-        "http://localhost:4000/api/posts/" + postId,
-        {}
-      );
+      const response = await fetch("http://localhost:4000/api/posts/" + postId);
 
       const json = await response.json();
 

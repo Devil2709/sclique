@@ -62,7 +62,7 @@ const DiscussionCard = (props) => {
                     bgcolor: props.avatarColor,
                   }}
                 >
-                  {props.username[0]}
+                  {props.username[0].toUpperCase()}
                 </Avatar>
               }
               title={props.username}

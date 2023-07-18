@@ -157,7 +157,9 @@ export default function NavBar() {
                     mr: 1,
                   }}
                 >
-                  <Avatar />
+                  <Avatar sx={{ bgcolor: user.avatarColor }}>
+                    {user.username[0].toUpperCase()}{" "}
+                  </Avatar>
                 </IconButton>
               )}
               <Menu
