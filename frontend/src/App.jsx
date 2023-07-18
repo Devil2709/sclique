@@ -24,6 +24,8 @@ function App() {
             path="/"
             element={
               <div>
+                <NavBar />
+                <section className="header" style={{ height: "80px" }} />
                 <Home />
               </div>
             }

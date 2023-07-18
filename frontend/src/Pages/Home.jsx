@@ -89,6 +89,7 @@ const Home = (props) => {
 
   const handlePosting = async (event) => {
     event.preventDefault();
+    setIsLoading(true);
     console.log("here");
     const post = {
       title: title,
@@ -204,7 +205,6 @@ const Home = (props) => {
                         </Grid>
                         <Grid item xs={12}>
                           <TextField
-                            required
                             fullWidth
                             multiline
                             name="content"

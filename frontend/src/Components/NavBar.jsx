@@ -5,6 +5,7 @@ import Tab from "@mui/material/Tab";
 import {
   AppBar,
   Avatar,
+  Button,
   Container,
   createTheme,
   Divider,
@@ -22,6 +23,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { Logout, Settings } from "@mui/icons-material";
 import { useSignout } from "../hooks/useSignout";
 import { useNavigate } from "react-router-dom";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 const darkTheme = createTheme({
   palette: {
@@ -74,6 +76,7 @@ export default function NavBar() {
   const open = Boolean(anchorEle);
   const { signout } = useSignout();
   const navigate = useNavigate();
+  const { user } = useAuthContext();
 
   const handleClose = () => {
     setAnchorEle(null);
@@ -139,22 +142,24 @@ export default function NavBar() {
                 orientation="vertical"
                 role="presentation"
                 variant="middle"
-                sx={{ height: "50px", mx: 4, alignSelf: "center" }}
+                sx={{ height: "50px", mr: 4, alignSelf: "center" }}
               />
-              <IconButton
-                onClick={handleClick}
-                aria-controls={open ? "account-menu" : undefined}
-                aria-haspopup="true"
-                aria-expanded={open ? "true" : undefined}
-                sx={{
-                  height: 50,
-                  width: 50,
-                  alignSelf: "center",
-                  mr: 1,
-                }}
-              >
-                <Avatar />
-              </IconButton>
+              {user && (
+                <IconButton
+                  onClick={handleClick}
+                  aria-controls={open ? "account-menu" : undefined}
+                  aria-haspopup="true"
+                  aria-expanded={open ? "true" : undefined}
+                  sx={{
+                    height: 50,
+                    width: 50,
+                    alignSelf: "center",
+                    mr: 1,
+                  }}
+                >
+                  <Avatar />
+                </IconButton>
+              )}
               <Menu
                 anchorEl={anchorEle}
                 id="account-menu"
@@ -200,13 +205,27 @@ export default function NavBar() {
                   </ListItemIcon>
                   Settings
                 </MenuItem>
-                <MenuItem onClick={handleLogout}>
-                  <ListItemIcon>
-                    <Logout fontSize="small" />
-                  </ListItemIcon>
-                  Logout
-                </MenuItem>
+                {user && (
+                  <MenuItem onClick={handleLogout}>
+                    <ListItemIcon>
+                      <Logout fontSize="small" />
+                    </ListItemIcon>
+                    Logout
+                  </MenuItem>
+                )}
               </Menu>
+              {!user && (
+                <Button
+                  variant="contained"
+                  color="primary"
+                  sx={{
+                    alignSelf: "center",
+                  }}
+                  href="/login"
+                >
+                  Login
+                </Button>
+              )}
             </Box>
           </Toolbar>
         </Container>

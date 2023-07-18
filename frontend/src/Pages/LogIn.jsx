@@ -10,11 +10,14 @@ import {
   Typography,
   Button,
   Avatar,
+  InputAdornment,
+  IconButton,
 } from "@mui/material";
 import Logo from "../Images/ScliqueLogo.png";
 import { useState } from "react";
 import { useSignin } from "../hooks/useSignin";
 import { useNavigate } from "react-router-dom";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 function Copyright(props) {
   return (
@@ -50,13 +53,13 @@ const darkTheme = createTheme({
 export default function LogIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [submitted, setSubmitted] = useState("");
   const { signin, isLoading, error, link } = useSignin(null);
   const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
+  const handleClickShowPassword = () => setShowPassword(!showPassword);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setSubmitted(true);
     await signin(email, password);
   };
 
@@ -112,6 +115,8 @@ export default function LogIn() {
                     label="Email Address"
                     name="email"
                     autoComplete="email"
+                    error={error === "Incorrect email"}
+                    helperText={error === "Incorrect email" ? error : ""}
                     onChange={(e) => setEmail(e.target.value)}
                     value={email}
                   />
@@ -122,11 +127,25 @@ export default function LogIn() {
                     fullWidth
                     name="password"
                     label="Password"
-                    type="password"
+                    type={showPassword ? "text" : "password"}
                     id="password"
                     autoComplete="new-password"
+                    error={error === "Incorrect password"}
+                    helperText={error === "Incorrect password" ? error : ""}
                     onChange={(e) => setPassword(e.target.value)}
                     value={password}
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <IconButton
+                            aria-label="toggle password visibility"
+                            onClick={handleClickShowPassword}
+                          >
+                            {showPassword ? <Visibility /> : <VisibilityOff />}
+                          </IconButton>
+                        </InputAdornment>
+                      ),
+                    }}
                   />
                 </Grid>
               </Grid>
@@ -139,7 +158,6 @@ export default function LogIn() {
               >
                 Log In
               </Button>
-              {error && <div>{error}</div>}
               {link && navigate(link)}
               <Grid container justifyContent="flex-end">
                 <Grid item>

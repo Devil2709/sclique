@@ -26,6 +26,7 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 import moment from "moment";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 const darkTheme = createTheme({
   palette: {
@@ -46,6 +47,8 @@ const CommentComp = ({ comment, handleNewComment }) => {
   const [isCommenting, setCommentState] = useState(false);
   const [commentText, setCommentText] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const { user } = useAuthContext();
+  console.log(user);
 
   const handleCommenting = () => {
     setCommentState(!isCommenting && localStorage.getItem("user"));
@@ -145,9 +148,11 @@ const CommentComp = ({ comment, handleNewComment }) => {
                 checkedIcon={<ThumbDownRounded />}
                 // onChange={}
               />
-              <IconButton sx={{ mx: 1 }} onClick={handleCommenting}>
-                <AddCommentRounded />
-              </IconButton>
+              {user && (
+                <IconButton sx={{ mx: 1 }} onClick={handleCommenting}>
+                  <AddCommentRounded />
+                </IconButton>
+              )}
             </CardActions>
             {isCommenting && comment?._id && (
               <Paper
@@ -285,9 +290,11 @@ const CommentComp = ({ comment, handleNewComment }) => {
 
                   // onChange={}
                 />
-                <IconButton sx={{ mx: 1 }} onClick={handleCommenting}>
-                  <AddCommentRounded />
-                </IconButton>
+                {user && (
+                  <IconButton sx={{ mx: 1 }} onClick={handleCommenting}>
+                    <AddCommentRounded />
+                  </IconButton>
+                )}
               </Stack>
               {isCommenting && (
                 <Paper

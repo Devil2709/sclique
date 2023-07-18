@@ -12,11 +12,14 @@ import {
   Avatar,
   FormControlLabel,
   Checkbox,
+  InputAdornment,
+  IconButton,
 } from "@mui/material";
 import Logo from "../Images/ScliqueLogo.png";
 import { useSignup } from "../hooks/useSignup";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 function Copyright(props) {
   return (
@@ -56,13 +59,13 @@ export default function SignUp() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [username, setUsername] = useState("");
-  const [submitted, setSubmitted] = useState("");
   const { signup, isLoading, error, link } = useSignup(null);
   const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
+  const handleClickShowPassword = () => setShowPassword(!showPassword);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitted(true);
     await signup(email, password, firstName, lastName, username);
   };
 
@@ -154,6 +157,16 @@ export default function SignUp() {
                     label="Email Address"
                     name="email"
                     autoComplete="email"
+                    error={
+                      error === "Email already in use" ||
+                      error === "Email not valid"
+                    }
+                    helperText={
+                      error === "Email already in use" ||
+                      error === "Email not valid"
+                        ? error
+                        : ""
+                    }
                     onChange={(e) => setEmail(e.target.value)}
                     value={email}
                   />
@@ -164,11 +177,27 @@ export default function SignUp() {
                     fullWidth
                     name="password"
                     label="Password"
-                    type="password"
+                    type={showPassword ? "text" : "password"}
                     id="password"
+                    error={error === "Password not strong enough"}
+                    helperText={
+                      error === "Password not strong enough" ? error : ""
+                    }
                     autoComplete="new-password"
                     onChange={(e) => setPassword(e.target.value)}
                     value={password}
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <IconButton
+                            aria-label="toggle password visibility"
+                            onClick={handleClickShowPassword}
+                          >
+                            {showPassword ? <Visibility /> : <VisibilityOff />}
+                          </IconButton>
+                        </InputAdornment>
+                      ),
+                    }}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -193,7 +222,7 @@ export default function SignUp() {
               >
                 Sign Up
               </Button>
-              {error && <div>{error}</div>}
+              {/* {error && <div>{error}</div>} */}
               {link && navigate(link)}
               <Grid container justifyContent="flex-end">
                 <Grid item>
